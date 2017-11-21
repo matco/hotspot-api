@@ -1,0 +1,110 @@
+package name.matco.hotspot.model;
+
+import java.util.Set;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+@JsonInclude(value = Include.NON_NULL)
+public class Stash implements Displayable {
+
+	@NotNull
+	private long pk;
+
+	@NotNull
+	private long userFk;
+
+	@NotNull
+	private String uuid;
+
+	@NotNull
+	@Size(min = 1, max = 200)
+	private String name;
+
+	private String description;
+
+	private Set<Spot> spots;
+
+	public final long getPk() {
+		return pk;
+	}
+
+	public final void setPk(final long pk) {
+		this.pk = pk;
+	}
+
+	public final long getUserFk() {
+		return userFk;
+	}
+
+	public final void setUserFk(final long userFk) {
+		this.userFk = userFk;
+	}
+
+	public final String getUuid() {
+		return uuid;
+	}
+
+	public final void setUuid(final String uuid) {
+		this.uuid = uuid;
+	}
+
+	public final String getName() {
+		return name;
+	}
+
+	public final void setName(final String name) {
+		this.name = name;
+	}
+
+	public final String getDescription() {
+		return description;
+	}
+
+	public final void setDescription(final String description) {
+		this.description = description;
+	}
+
+	public final Set<Spot> getSpots() {
+		return spots;
+	}
+
+	public final void setSpots(final Set<Spot> spots) {
+		this.spots = spots;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((uuid == null) ? 0 : uuid.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(final Object obj) {
+		if(this == obj) {
+			return true;
+		}
+		if(obj == null) {
+			return false;
+		}
+		if(getClass() != obj.getClass()) {
+			return false;
+		}
+		final Stash other = (Stash) obj;
+		if(uuid == null) {
+			if(other.uuid != null) {
+				return false;
+			}
+		}
+		else if(!uuid.equals(other.uuid)) {
+			return false;
+		}
+		return true;
+	}
+
+}
