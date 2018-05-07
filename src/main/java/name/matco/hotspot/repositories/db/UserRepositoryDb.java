@@ -121,6 +121,7 @@ public class UserRepositoryDb implements UserRepository {
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getFirstname());
 			statement.setString(4, user.getLastname());
+			statement.setString(5, user.getHandle());
 			statement.executeUpdate();
 			return true;
 		}
