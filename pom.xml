@@ -17,9 +17,9 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson-version>2.9.0</jackson-version>
+		<jackson-version>2.9.5</jackson-version>
 		<log4j2-version>2.9.0</log4j2-version>
-		<jersey-version>2.25.1</jersey-version>
+		<jersey-version>2.27</jersey-version>
 		<jetty-version>9.4.5.v20170502</jetty-version>
 	</properties>
 
@@ -83,11 +83,17 @@
 			<version>${jackson-version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.jaxrs</groupId>
+			<artifactId>jackson-jaxrs-json-provider</artifactId>
+			<version>${jackson-version}</version>
+		</dependency>
+
 		<!-- rest -->
 		<dependency>
 			<groupId>javax.ws.rs</groupId>
 			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.0.1</version>
+			<version>2.1</version>
 		</dependency>
 
 		<dependency>
@@ -112,6 +118,12 @@
 			<groupId>org.glassfish.jersey.security</groupId>
 			<artifactId>oauth2-client</artifactId>
 			<version>${jersey-version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.27</version>
 		</dependency>
 
 		<dependency>
