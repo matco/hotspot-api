@@ -51,6 +51,6 @@ create table if not exists spot (
 create table if not exists stash_spot (
 	stash_fk integer not null,
 	spot_fk integer not null,
-	constraint stash foreign key (stash_fk) references stash(pk),
-	constraint spot foreign key (spot_fk) references spot(pk)
+	constraint stash foreign key (stash_fk) references stash(pk) on delete cascade,
+	constraint spot foreign key (spot_fk) references spot(pk) on delete cascade
 ) engine=InnoDB default charset=utf8 collate=utf8_bin;
