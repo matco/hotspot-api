@@ -1,12 +1,9 @@
 package name.matco.hotspot.api;
 
-import javax.xml.bind.annotation.XmlRootElement;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(value = Include.NON_NULL)
-@XmlRootElement
 public class ErrorResponse {
 
 	public final String error;
