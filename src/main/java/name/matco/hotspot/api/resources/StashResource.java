@@ -135,6 +135,7 @@ public class StashResource {
 			final Spot spot = spotRepository.getByUuid(spotUuid).get();
 			if(spot.getUserFk() == user.getPk()) {
 				spotRepository.addToStash(stash, spot);
+				return;
 			}
 		}
 		throw new NotAuthorizedException("Bearer");
@@ -149,6 +150,7 @@ public class StashResource {
 			final Spot spot = spotRepository.getByUuid(spotUuid).get();
 			if(spot.getUserFk() == user.getPk()) {
 				spotRepository.removeFromStash(stash, spot);
+				return;
 			}
 		}
 		throw new NotAuthorizedException("Bearer");
