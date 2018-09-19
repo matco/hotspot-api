@@ -25,6 +25,7 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 
 import name.matco.hotspot.api.ErrorResponse;
+import name.matco.hotspot.api.security.tokens.InvalidToken;
 import name.matco.hotspot.api.security.tokens.JWTService;
 import name.matco.hotspot.model.User;
 import name.matco.hotspot.repositories.UserRepository;
@@ -95,16 +96,16 @@ public class AuthenticationRequestFilter implements ContainerRequestFilter {
 					context.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorResponse("User is no longer valid. Please login again.")).build());
 				}
 			}
-			catch(final JWTVerificationException e) {
+			catch(final JWTVerificationException | InvalidToken e) {
 				LOGGER.catching(Level.INFO, e);
-				context.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorResponse("Invalid session. Please login again.")).build());
+				context.abortWith(Response.status(Response.Status.UNAUTHORIZED).entity(new ErrorResponse("Invalid token. Please login again.")).build());
 			}
 
 			//verify user access
 			/*if(method.isAnnotationPresent(RolesAllowed.class)) {
 				final RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
 				final Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
-			
+
 				//Is user valid?
 				if(!isUserAllowed(username, password, rolesSet)) {
 					context.abortWith(ACCESS_UNAUTHORIZED);

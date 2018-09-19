@@ -4,94 +4,57 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
-import name.matco.hotspot.model.User;
 import name.matco.hotspot.services.datasource.ConnectionProvider;
 
 public class RevokedTokenRepository {
 
-	private static final String CHECK_EXISTING_TOKEN_QUERY = "SELECT token FROM session WHERE token = ? LIMIT 1";
-	private static final String CREATE_SESSION_QUERY = "INSERT INTO session(token, user_fk, last_use_date) VALUES(?, ?, NOW())";
-	private static final String GET_SESSION_QUERY = "SELECT token, user_fk FROM session WHERE token = ? LIMIT 1";
-	private static final String UPDATE_LAST_USE_QUERY = "UPDATE session SET last_use_date = NOW() WHERE token = ?";
-	private static final String DELETE_SESSION_QUERY = "DELETE FROM session WHERE token = ?";
+	private static final Logger LOGGER = LogManager.getLogger(RevokedTokenRepository.class.getName());
 
 	@Inject
 	private ConnectionProvider connectionProvider;
 
-	private static String generateToken() {
-		return RandomStringUtils.randomNumeric(32);
+	public static RevokedToken generateRevokedToken(final ResultSet result) throws SQLException {
+		return new RevokedToken(result.getString("token"), result.getTimestamp("expiration_date").toInstant(), result.getLong("user_fk"));
 	}
 
-	public boolean check(final String token) {
+	public Optional<RevokedToken> getByToken(final String token) {
 		try(
-				Connection connection = connectionProvider.getConnection();
-				PreparedStatement ps = connection.prepareStatement(CHECK_EXISTING_TOKEN_QUERY);) {
-			ps.setString(1, token);
-			return ps.execute();
-		}
-		catch(final SQLException ex) {
-			ex.printStackTrace();
-			return false;
-		}
-	}
-
-	public String create(final User user) throws SQLException {
-		//generate token that doesn't already exist
-		String token = null;
-		do {
-			token = generateToken();
-		}
-		while(!check(token));
-
-		try(
-				Connection connection = connectionProvider.getConnection();
-				PreparedStatement ps = connection.prepareStatement(CREATE_SESSION_QUERY)) {
-			ps.setString(1, token);
-			ps.setLong(2, user.getPk());
-			ps.executeUpdate();
-			return token;
-		}
-	}
-
-	public Long get(final String token) throws InvalidToken {
-		try(
-				Connection connection = connectionProvider.getConnection();
-				PreparedStatement ps = connection.prepareStatement(GET_SESSION_QUERY);) {
-			ps.setString(1, token);
-			try(ResultSet results = ps.executeQuery()) {
-				if(results.next()) {
-					update(token);
-					return results.getLong("user_fk");
-				}
+				final Connection connection = connectionProvider.getConnection();
+				final PreparedStatement statement = connection.prepareStatement("select * from revoked_token where token = ? limit 1");) {
+			statement.setString(1, token);
+			final ResultSet result = statement.executeQuery();
+			while(result.next()) {
+				return Optional.<RevokedToken> of(generateRevokedToken(result));
 			}
 		}
-		catch(final SQLException ex) {
-			ex.printStackTrace();
+		catch(final SQLException e) {
+			LOGGER.catching(Level.ERROR, e);
 		}
-		throw new InvalidToken();
+		return Optional.<RevokedToken> empty();
 	}
 
-	public boolean delete(final String token) throws SQLException {
+	public boolean save(final RevokedToken revokedToken) {
 		try(
-				Connection connection = connectionProvider.getConnection();
-				PreparedStatement ps = connection.prepareStatement(DELETE_SESSION_QUERY);) {
-			ps.setString(1, token);
-			final int res = ps.executeUpdate();
-			return res > 0;
+				final Connection connection = connectionProvider.getConnection();
+				final PreparedStatement statement = connection.prepareStatement("insert into revoked_token (token, expiration_date, user_fk) values (?, ?, ?)");) {
+			statement.setString(1, revokedToken.getToken());
+			statement.setTimestamp(2, Timestamp.from(revokedToken.getExpirationDate()));
+			statement.setLong(3, revokedToken.getUserFk());
+			statement.executeUpdate();
+			return true;
 		}
-	}
-
-	private void update(final String token) throws SQLException {
-		try(
-				Connection connection = connectionProvider.getConnection();
-				PreparedStatement ps = connection.prepareStatement(UPDATE_LAST_USE_QUERY);) {
-			ps.setString(1, token);
-			ps.executeUpdate();
+		catch(final SQLException e) {
+			LOGGER.catching(Level.ERROR, e);
+			return false;
 		}
 	}
 }

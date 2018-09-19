@@ -34,9 +34,6 @@ public class TokenResource {
 	@Inject
 	private UserRepository userRepository;
 
-	@Inject
-	private RevokedTokenRepository revokedTokenRepository;
-
 	@POST
 	@PermitAll
 	public Response getToken(final Credentials credentials) throws Exception {
@@ -52,8 +49,8 @@ public class TokenResource {
 	public Response revokeToken(
 			@HeaderParam(javax.ws.rs.core.HttpHeaders.AUTHORIZATION) final String authorization) throws Exception {
 		final User user = (User) sc.getUserPrincipal();
-		revokedTokenRepository.create(user);//sessionRepository.delete(AuthenticationRequestFilter.retrieveToken(authorization));
-		return Response.ok().build();
+		jwtService.revoke(user, authorization);
+		return Response.noContent().build();
 	}
 
 }

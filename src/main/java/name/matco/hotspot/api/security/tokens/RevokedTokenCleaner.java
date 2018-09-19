@@ -16,7 +16,6 @@ import name.matco.hotspot.services.datasource.ConnectionProvider;
 public class RevokedTokenCleaner {
 
 	private static final int TOKEN_CHECK_INTERVAL = 60; //in seconds
-	private static final String DELETE_EXPIRED_TOKENS_QUERY = String.format("DELETE FROM revoked_token WHERE expiration_date > NOW()");
 
 	@Inject
 	private ConnectionProvider connectionProvider;
@@ -29,10 +28,10 @@ public class RevokedTokenCleaner {
 		final Runnable clean = () -> {
 			try(
 					Connection connection = connectionProvider.getConnection();
-					PreparedStatement ps = connection.prepareStatement(DELETE_EXPIRED_TOKENS_QUERY)) {
-				final int res = ps.executeUpdate();
-				if(res > 0) {
-					Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Cleaner removed " + res + " session(s).");
+					PreparedStatement ps = connection.prepareStatement("delete from revoked_token where expiration_date > now()")) {
+				final int result = ps.executeUpdate();
+				if(result > 0) {
+					Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Cleaner removed " + result + " revoked token(s).");
 				}
 			}
 			catch(final SQLException ex) {
@@ -41,11 +40,11 @@ public class RevokedTokenCleaner {
 		};
 
 		cleaner.scheduleAtFixedRate(clean, 0, TOKEN_CHECK_INTERVAL, TimeUnit.SECONDS);
-		Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Session cleaner started.");
+		Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Revoked token cleaner started.");
 	}
 
 	public void stop() {
 		cleaner.shutdown();
-		Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Session cleaner stopped.");
+		Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Revoked token cleaner stopped.");
 	}
 }

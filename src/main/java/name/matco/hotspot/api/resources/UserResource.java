@@ -19,7 +19,7 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.SecurityContext;
 
 import name.matco.hotspot.api.security.AuthenticationRequestFilter;
-import name.matco.hotspot.api.security.tokens.RevokedTokenRepository;
+import name.matco.hotspot.api.security.tokens.JWTService;
 import name.matco.hotspot.model.User;
 import name.matco.hotspot.repositories.UserRepository;
 
@@ -28,7 +28,7 @@ import name.matco.hotspot.repositories.UserRepository;
 public class UserResource {
 
 	@Inject
-	private RevokedTokenRepository revokedTokenRepository;
+	private JWTService jwtService;
 
 	@Inject
 	private UserRepository userRepository;
@@ -76,8 +76,8 @@ public class UserResource {
 		if(user.getHandle().equals(handle)) {
 			//delete
 			userRepository.delete(user);
-			//logout user
-			revokedTokenRepository.delete(AuthenticationRequestFilter.retrieveToken(authorization));
+			//revoke user
+			jwtService.revoke(user, AuthenticationRequestFilter.retrieveToken(authorization));
 			return Response.ok().build();
 		}
 		return Response.status(Status.FORBIDDEN).build();

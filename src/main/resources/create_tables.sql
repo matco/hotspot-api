@@ -12,8 +12,9 @@ create table if not exists user (
 	unique key user_handle(handle)
 ) engine=InnoDB default charset=utf8 collate=utf8_bin;
 
+-- revoked token table does not need to be persistent because token will become invalid each time the instance restarts anyway
 create table if not exists revoked_token (
-	token varchar(32) not null,
+	token varchar(1000) not null,
 	expiration_date datetime not null,
 	user_fk integer not null,
 	primary key (token),
