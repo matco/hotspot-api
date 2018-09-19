@@ -30,7 +30,7 @@ create table if not exists stash (
 	description text,
 	primary key (pk),
 	unique key stash_uuid(uuid),
-	constraint stash_user foreign key (user_fk) references user(pk)
+	constraint stash_user foreign key (user_fk) references user(pk) on delete cascade
 ) engine=InnoDB default charset=utf8 collate=utf8_bin;
 
 create table if not exists spot (
@@ -45,7 +45,7 @@ create table if not exists spot (
 	description text,
 	primary key (pk),
 	unique key spot_uuid(uuid),
-	constraint spot_user foreign key (user_fk) references user(pk)
+	constraint spot_user foreign key (user_fk) references user(pk) on delete cascade
 ) engine=InnoDB default charset=utf8 collate=utf8_bin;
 
 create table if not exists stash_spot (
