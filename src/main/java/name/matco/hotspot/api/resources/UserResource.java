@@ -78,7 +78,7 @@ public class UserResource {
 			userRepository.delete(user);
 			//revoke user
 			jwtService.revoke(user, AuthenticationRequestFilter.retrieveToken(authorization));
-			return Response.ok().build();
+			return Response.noContent().build();
 		}
 		return Response.status(Status.FORBIDDEN).build();
 	}
