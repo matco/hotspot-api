@@ -43,7 +43,7 @@ public class UserRepositoryDb implements UserRepository {
 		try(
 				final Connection connection = connectionProvider.getConnection();
 				final Statement statement = connection.createStatement();
-				final ResultSet result = statement.executeQuery("select * from users");) {
+				final ResultSet result = statement.executeQuery("select * from user");) {
 			while(result.next()) {
 				users.add(generateUser(result));
 			}
@@ -116,7 +116,7 @@ public class UserRepositoryDb implements UserRepository {
 	public boolean update(final User user) {
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("update users set email = ?, password = ?, firstname = ?, lastname = ? where handle = ?");) {
+				final PreparedStatement statement = connection.prepareStatement("update user set email = ?, password = ?, firstname = ?, lastname = ? where handle = ?");) {
 			statement.setString(1, user.getEmail());
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getFirstname());
@@ -135,7 +135,7 @@ public class UserRepositoryDb implements UserRepository {
 	public boolean delete(final User user) {
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("delete from users where handle = ? limit 1");) {
+				final PreparedStatement statement = connection.prepareStatement("delete from user where handle = ? limit 1");) {
 			statement.setString(1, user.getHandle());
 			statement.executeUpdate();
 			return true;
