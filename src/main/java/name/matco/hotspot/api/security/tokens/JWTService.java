@@ -1,6 +1,5 @@
 package name.matco.hotspot.api.security.tokens;
 
-import java.io.UnsupportedEncodingException;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
@@ -28,7 +27,7 @@ public class JWTService {
 	private final Algorithm algorithm;
 	private final JWTVerifier verifier;
 
-	public JWTService() throws IllegalArgumentException, UnsupportedEncodingException {
+	public JWTService() throws IllegalArgumentException {
 		algorithm = Algorithm.HMAC256(JWT_SECRET);
 		verifier = JWT.require(algorithm).withIssuer(JWT_ISSUER).build();
 	}
