@@ -7,7 +7,7 @@ You just found a nice spot. Save it now and get back there easily at any time. S
 
 ## Start API server
 For those who want to run the API server, here is what you need:
-* Java 8
+* Java 12
 * Maven
 
 Then, use the following command to launch the server:
