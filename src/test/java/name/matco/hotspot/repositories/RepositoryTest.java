@@ -10,7 +10,7 @@ import org.glassfish.hk2.api.DynamicConfigurationService;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.glassfish.hk2.api.ServiceLocatorFactory;
 import org.glassfish.hk2.utilities.BuilderHelper;
-import org.junit.Before;
+import org.junit.jupiter.api.BeforeAll;
 
 import name.matco.hotspot.helpers.InitDatabase;
 import name.matco.hotspot.repositories.db.SpotRepositoryDb;
@@ -21,14 +21,14 @@ import name.matco.hotspot.services.datasource.mocks.ConnectionProviderMock;
 
 public class RepositoryTest {
 
-	protected ServiceLocator locator;
+	protected static ServiceLocator LOCATOR;
 
-	@Before
-	public void init() throws SQLException {
+	@BeforeAll
+	public static void init() throws SQLException {
 		//initialize dependency injection
 		final ServiceLocatorFactory factory = ServiceLocatorFactory.getInstance();
-		locator = factory.create(UUID.randomUUID().toString());
-		final DynamicConfigurationService dcs = locator.getService(DynamicConfigurationService.class);
+		LOCATOR = factory.create(UUID.randomUUID().toString());
+		final DynamicConfigurationService dcs = LOCATOR.getService(DynamicConfigurationService.class);
 		final DynamicConfiguration config = dcs.createDynamicConfiguration();
 		config.bind(BuilderHelper.link(ConnectionProviderMock.class).to(ConnectionProvider.class).in(Singleton.class).build());
 		config.bind(BuilderHelper.link(UserRepositoryDb.class).to(UserRepository.class).in(Singleton.class).build());
@@ -36,6 +36,6 @@ public class RepositoryTest {
 		config.bind(BuilderHelper.link(SpotRepositoryDb.class).to(SpotRepository.class).in(Singleton.class).build());
 		config.commit();
 		//initialize database
-		InitDatabase.createDatabase(locator.getService(ConnectionProvider.class));
+		InitDatabase.createDatabase(LOCATOR.getService(ConnectionProvider.class));
 	}
 }
