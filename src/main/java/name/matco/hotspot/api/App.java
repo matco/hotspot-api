@@ -39,6 +39,7 @@ public class App extends ResourceConfig {
 			catch(final IOException e) {
 				e.printStackTrace();
 			}
+			PROPERTIES.putAll(System.getProperties());
 		}
 		return PROPERTIES;
 	}
