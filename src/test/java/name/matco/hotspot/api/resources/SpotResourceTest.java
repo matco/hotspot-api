@@ -15,7 +15,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.Response.Status;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import name.matco.hotspot.api.AuthenticatedTest;
 import name.matco.hotspot.model.Spot;

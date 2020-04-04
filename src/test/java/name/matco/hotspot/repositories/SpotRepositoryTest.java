@@ -3,7 +3,7 @@ package name.matco.hotspot.repositories;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import name.matco.hotspot.model.Spot;
 import name.matco.hotspot.model.User;
@@ -16,10 +16,10 @@ public class SpotRepositoryTest extends RepositoryTest {
 		user.setFirstname("John");
 		user.setLastname("Doe");
 		user.setEmail("john@doe.com");
-		UserRepository userRepository = locator.getService(UserRepository.class);
+		UserRepository userRepository = LOCATOR.getService(UserRepository.class);
 		userRepository.save(user);
 
-		SpotRepository spotRepository = locator.getService(SpotRepository.class);
+		SpotRepository spotRepository = LOCATOR.getService(SpotRepository.class);
 
 		Spot spot = new Spot();
 		spot.setUserFk(user.getPk());
