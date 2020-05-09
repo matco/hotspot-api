@@ -11,16 +11,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 @JsonInclude(value = Include.NON_NULL)
 public class User implements Principal {
-
-	public static final String QUERY_FIND_BY_EMAIL = "User.findByEmail";
-	public static final String QUERY_FIND_BY_HANDLE = "User.findByHandle";
-
-	public static String hashPassword(final String password) {
-		//TODO improve this (add salt)
-		return DigestUtils.sha1Hex(password);
-	}
 
 	@NotNull
 	private long pk;
@@ -32,7 +26,6 @@ public class User implements Principal {
 	private String email;
 
 	@NotNull
-	//@JsonProperty(access = Access.WRITE_ONLY)
 	private String password;
 
 	@NotNull
@@ -111,11 +104,11 @@ public class User implements Principal {
 
 	@JsonIgnore
 	public void setPlainTextPassword(final String password) {
-		this.password = hashPassword(password);
+		this.password = BCrypt.withDefaults().hashToString(12, password.toCharArray());
 	}
 
 	public boolean checkPassword(final String challengePassword) {
-		return hashPassword(challengePassword).equals(this.password);
+		return BCrypt.verifyer().verify(challengePassword.toCharArray(), password).verified;
 	}
 
 	@Override

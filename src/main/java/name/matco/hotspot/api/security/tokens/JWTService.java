@@ -42,7 +42,7 @@ public class JWTService {
 	}
 
 	public DecodedJWT verify(final String token) throws JWTVerificationException, InvalidToken {
-		//check among revoken token
+		//check among revoked token
 		if(revokedTokenRepository.getByToken(token).isPresent()) {
 			throw new InvalidToken();
 		}

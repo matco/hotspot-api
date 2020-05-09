@@ -6,7 +6,7 @@ create table if not exists user (
 	firstname varchar(200),
 	lastname varchar(200),
 	email varchar(200),
-	password varchar(50),
+	password varchar(60),
 	primary key (pk),
 	unique key user_email(email),
 	unique key user_handle(handle)
