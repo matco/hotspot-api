@@ -19,7 +19,7 @@ public class UserTest {
 		assertNotNull(encryptedPassword);
 		assertNotEquals(password, encryptedPassword);
 		
-		//because of random salt, new encypted password should noy be equal to previous hash
+		//because of random salt, new encrypted password should not be equal to previous hash
 		user.setPlainTextPassword(password);
 		assertNotEquals(encryptedPassword, user.getPassword());
 		

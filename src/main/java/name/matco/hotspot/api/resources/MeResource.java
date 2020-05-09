@@ -10,7 +10,9 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.Response.Status;
 
 import name.matco.hotspot.model.User;
 import name.matco.hotspot.repositories.UserRepository;
@@ -37,14 +39,13 @@ public class MeResource {
 
 	@Path("/password")
 	@POST
-	public void updatePassord(PasswordUpdate passwordUpdate) throws Exception {
+	public Response updatePassord(PasswordUpdate passwordUpdate) throws Exception {
 		final User user = (User) sc.getUserPrincipal();
 		if(user.checkPassword(passwordUpdate.currentPassword)) {
 			user.setPlainTextPassword(passwordUpdate.newPassword);
-			userRepository.save(user);
+			userRepository.update(user);
+			return Response.noContent().build();
 		}
-		else {
-			throw new ForbiddenException();
-		}
+		return Response.status(Status.UNAUTHORIZED).build();
 	}
 }
