@@ -3,7 +3,6 @@ package name.matco.hotspot.api.resources;
 import java.security.Principal;
 
 import javax.inject.Inject;
-import javax.ws.rs.ForbiddenException;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -46,6 +45,6 @@ public class MeResource {
 			userRepository.update(user);
 			return Response.noContent().build();
 		}
-		return Response.status(Status.UNAUTHORIZED).build();
+		return Response.status(Status.FORBIDDEN).build();
 	}
 }

@@ -1,11 +1,8 @@
 package name.matco.hotspot.model;
 
 import java.security.Principal;
-import java.util.Set;
 
 import javax.validation.constraints.NotNull;
-
-import org.apache.commons.codec.digest.DigestUtils;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -33,10 +30,6 @@ public class User implements Principal {
 
 	@NotNull
 	private String lastname;
-
-	private Set<Stash> stashs;
-
-	private Set<Spot> spots;
 
 	public final long getPk() {
 		return pk;
@@ -84,22 +77,6 @@ public class User implements Principal {
 
 	public final void setLastname(final String lastname) {
 		this.lastname = lastname;
-	}
-
-	public final Set<Stash> getStashs() {
-		return stashs;
-	}
-
-	public final void setStashs(final Set<Stash> stashs) {
-		this.stashs = stashs;
-	}
-
-	public final Set<Spot> getSpots() {
-		return spots;
-	}
-
-	public final void setSpots(final Set<Spot> spots) {
-		this.spots = spots;
 	}
 
 	@JsonIgnore
