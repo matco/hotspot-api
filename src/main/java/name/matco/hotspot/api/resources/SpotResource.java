@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotAuthorizedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -93,10 +94,15 @@ public class SpotResource {
 
 	@PUT
 	@Path(App.RESOURCE_UUID_PATH)
-	public Response updateSpot(@PathParam("uuid") final String uuid, final Spot spot) {
+	public Response updateSpot(@PathParam("uuid") final String uuid, final Spot spotDto) {
 		final User user = (User) sc.getUserPrincipal();
-		if(spotRepository.getByUuid(uuid).get().getUserFk() == user.getPk()) {
-			spot.setUserFk(user.getPk());
+		var spot = spotRepository.getByUuid(uuid).orElseThrow(() -> new NotFoundException());
+		if(spot.getUserFk() == user.getPk()) {
+			spot.setName(spotDto.getName());
+			spot.setDescription(spotDto.getDescription());
+			spot.setLatitude(spotDto.getLatitude());
+			spot.setLongitude(spotDto.getLongitude());
+			spot.setLabels(spotDto.getLabels());
 			spotRepository.update(spot);
 			return Response.noContent().build();
 		}

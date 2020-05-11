@@ -9,6 +9,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.NotAuthorizedException;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -93,10 +94,12 @@ public class StashResource {
 
 	@PUT
 	@Path(App.RESOURCE_UUID_PATH)
-	public Response updateStash(@PathParam("uuid") final String uuid, final Stash stash) {
+	public Response updateStash(@PathParam("uuid") final String uuid, final Stash stashDto) {
 		final User user = (User) sc.getUserPrincipal();
-		if(stashRepository.getByUuid(uuid).get().getUserFk() == user.getPk()) {
-			stash.setUserFk(user.getPk());
+		var stash = stashRepository.getByUuid(uuid).orElseThrow(() -> new NotFoundException());
+		if(stash.getUserFk() == user.getPk()) {
+			stash.setName(stashDto.getName());
+			stash.setDescription(stashDto.getDescription());
 			stashRepository.update(stash);
 			return Response.noContent().build();
 		}
