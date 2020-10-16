@@ -13,8 +13,8 @@ import org.junit.Test;
 
 import name.matco.hotspot.api.APITest;
 import name.matco.hotspot.api.AuthenticatedTest;
+import name.matco.hotspot.api.dto.UserDto;
 import name.matco.hotspot.api.security.tokens.Credentials;
-import name.matco.hotspot.model.User;
 
 public class UserResourceTest extends APITest {
 
@@ -24,13 +24,13 @@ public class UserResourceTest extends APITest {
 		final String email = String.format("john@%s.com", lastname);
 		final String password = "password";
 
-		final User newUser = new User();
+		final UserDto newUser = new UserDto();
 		newUser.setFirstname("John");
 		newUser.setLastname(lastname);
 		newUser.setEmail(email);
 		newUser.setPassword(password);
 
-		final User responseUser = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(User.class);
+		final UserDto responseUser = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(UserDto.class);
 		assertEquals("John", responseUser.getFirstname());
 		assertEquals(lastname, responseUser.getLastname());
 		assertEquals(email, responseUser.getEmail());

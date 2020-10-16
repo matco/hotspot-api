@@ -13,9 +13,9 @@ import javax.ws.rs.core.MediaType;
 import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.client.ClientConfig;
 
+import name.matco.hotspot.api.dto.UserDto;
 import name.matco.hotspot.api.security.AuthenticationRequestFilter;
 import name.matco.hotspot.api.security.tokens.Credentials;
-import name.matco.hotspot.model.User;
 
 public class AuthenticatedTest extends APITest {
 
@@ -30,7 +30,7 @@ public class AuthenticatedTest extends APITest {
 
 	protected String token;
 
-	protected User user;
+	protected UserDto user;
 
 	@Override
 	public void configureClient(final ClientConfig config) {
@@ -47,13 +47,12 @@ public class AuthenticatedTest extends APITest {
 	}
 
 	public void create_user() {
-		user = new User();
-		user.setFirstname(USER_FIRSTNAME);
-		user.setLastname(USER_LASTNAME);
-		user.setEmail(USER_EMAIL);
-		user.setPassword(USER_PASSWORD);
-		final User newUser = target("users").request().post(Entity.entity(user, MediaType.APPLICATION_JSON)).readEntity(User.class);
-		user.setPk(newUser.getPk());
+		var newUser = new UserDto();
+		newUser.setFirstname(USER_FIRSTNAME);
+		newUser.setLastname(USER_LASTNAME);
+		newUser.setEmail(USER_EMAIL);
+		newUser.setPassword(USER_PASSWORD);
+		user = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(UserDto.class);
 		user.setHandle(newUser.getHandle());
 	}
 
