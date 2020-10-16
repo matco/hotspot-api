@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import javax.ws.rs.client.ClientRequestContext;
-import javax.ws.rs.client.ClientRequestFilter;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.client.ClientRequestContext;
+import jakarta.ws.rs.client.ClientRequestFilter;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.GenericType;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
 
 import org.apache.commons.lang3.StringUtils;
 import org.glassfish.jersey.client.ClientConfig;
@@ -40,7 +41,7 @@ public class AuthenticatedTest extends APITest {
 			public void filter(final ClientRequestContext requestContext) throws IOException {
 				if(StringUtils.isNoneBlank(token)) {
 					final String header = AuthenticationRequestFilter.generateHeader(token);
-					requestContext.getHeaders().put(javax.ws.rs.core.HttpHeaders.AUTHORIZATION, Collections.singletonList(header));
+					requestContext.getHeaders().put(HttpHeaders.AUTHORIZATION, Collections.singletonList(header));
 				}
 			}
 		});

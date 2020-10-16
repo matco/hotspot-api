@@ -1,6 +1,6 @@
 package name.matco.hotspot.api;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import org.glassfish.hk2.utilities.binding.AbstractBinder;
 

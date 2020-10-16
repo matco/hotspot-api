@@ -2,7 +2,7 @@ package name.matco.hotspot.api.security.tokens;
 
 import java.time.Instant;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 public class RevokedToken {
 

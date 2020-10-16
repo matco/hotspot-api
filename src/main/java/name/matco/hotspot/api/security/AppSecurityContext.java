@@ -2,8 +2,8 @@ package name.matco.hotspot.api.security;
 
 import java.security.Principal;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.SecurityContext;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.core.SecurityContext;
 
 import name.matco.hotspot.model.User;
 import name.matco.hotspot.repositories.UserRepository;

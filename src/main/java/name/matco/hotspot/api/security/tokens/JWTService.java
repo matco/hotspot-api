@@ -3,7 +3,7 @@ package name.matco.hotspot.api.security.tokens;
 import java.time.ZonedDateTime;
 import java.util.Date;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 
 import org.apache.commons.lang3.RandomStringUtils;
 

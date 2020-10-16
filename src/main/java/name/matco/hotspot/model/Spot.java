@@ -2,8 +2,8 @@ package name.matco.hotspot.model;
 
 import java.util.Set;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -58,6 +58,7 @@ public class Spot implements Displayable {
 		this.uuid = uuid;
 	}
 
+	@Override
 	public final String getName() {
 		return name;
 	}
@@ -82,6 +83,7 @@ public class Spot implements Displayable {
 		this.longitude = longitude;
 	}
 
+	@Override
 	public final String getDescription() {
 		return description;
 	}

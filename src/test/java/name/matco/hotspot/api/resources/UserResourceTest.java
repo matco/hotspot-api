@@ -4,9 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.Test;
@@ -43,7 +44,7 @@ public class UserResourceTest extends APITest {
 		final Map<String, String> responseToken = target("tokens").request().post(Entity.entity(credentials, MediaType.APPLICATION_JSON)).readEntity(AuthenticatedTest.TOKEN_TYPE);
 		final String token = responseToken.get("token");
 
-		final var response = target("users").path(handle).request().header(javax.ws.rs.core.HttpHeaders.AUTHORIZATION, token).delete();
+		final var response = target("users").path(handle).request().header(HttpHeaders.AUTHORIZATION, token).delete();
 		assertEquals(Status.NO_CONTENT.getStatusCode(), response.getStatus());
 	}
 }

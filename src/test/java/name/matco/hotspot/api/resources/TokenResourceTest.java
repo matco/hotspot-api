@@ -3,9 +3,10 @@ package name.matco.hotspot.api.resources;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response.Status;
+import jakarta.ws.rs.client.Entity;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response.Status;
 
 import org.junit.Test;
 
@@ -28,7 +29,7 @@ public class TokenResourceTest extends AuthenticatedTest {
 		final var customToken = responseToken.get("token");
 		assertNotNull(customToken);
 
-		response = target("tokens").request().header(javax.ws.rs.core.HttpHeaders.AUTHORIZATION, customToken).delete();
+		response = target("tokens").request().header(HttpHeaders.AUTHORIZATION, customToken).delete();
 		assertEquals(Status.NO_CONTENT.getStatusCode(), response.getStatus());
 	}
 }

@@ -3,7 +3,7 @@ package name.matco.hotspot.repositories;
 import java.sql.SQLException;
 import java.util.UUID;
 
-import javax.inject.Singleton;
+import jakarta.inject.Singleton;
 
 import org.glassfish.hk2.api.DynamicConfiguration;
 import org.glassfish.hk2.api.DynamicConfigurationService;

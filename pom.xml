@@ -1,5 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>name.matco</groupId>
@@ -17,10 +18,10 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<jackson-version>2.11.0</jackson-version>
-		<log4j2-version>2.13.2</log4j2-version>
-		<jersey-version>2.30</jersey-version>
-		<jetty-version>9.4.19.v20190610</jetty-version>
+		<jackson-version>2.12.0-rc1</jackson-version>
+		<log4j2-version>2.13.3</log4j2-version>
+		<jersey-version>3.0.0-M6</jersey-version>
+		<jetty-version>11.0.0.beta2</jetty-version>
 	</properties>
 
 	<dependencies>
@@ -40,7 +41,7 @@
 		<dependency>
 			<groupId>com.sun.xml.ws</groupId>
 			<artifactId>jaxws-ri</artifactId>
-			<version>2.3.2</version>
+			<version>3.0.0-M4</version>
 			<type>pom</type>
 		</dependency>
 
@@ -67,7 +68,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.20</version>
+			<version>8.0.21</version>
 			<scope>runtime</scope>
 		</dependency>
 
@@ -81,7 +82,7 @@
 		<dependency>
 			<groupId>commons-codec</groupId>
 			<artifactId>commons-codec</artifactId>
-			<version>1.14</version>
+			<version>1.15</version>
 		</dependency>
 
 		<dependency>
@@ -93,7 +94,7 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.10</version>
+			<version>3.11</version>
 		</dependency>
 
 		<!-- serialization -->
@@ -111,9 +112,9 @@
 
 		<!-- rest -->
 		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>javax.ws.rs-api</artifactId>
-			<version>2.1.1</version>
+			<groupId>jakarta.ws.rs</groupId>
+			<artifactId>jakarta.ws.rs-api</artifactId>
+			<version>3.0.0-M1</version>
 		</dependency>
 
 		<dependency>
@@ -150,7 +151,7 @@
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
-			<version>3.10.3</version>
+			<version>3.11.0</version>
 		</dependency>
 
 		<dependency>
@@ -163,7 +164,7 @@
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.13</version>
+			<version>4.13.1</version>
 			<scope>test</scope>
 		</dependency>
 

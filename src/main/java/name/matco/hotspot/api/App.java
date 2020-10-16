@@ -3,7 +3,7 @@ package name.matco.hotspot.api;
 import java.io.IOException;
 import java.util.Properties;
 
-import javax.ws.rs.ApplicationPath;
+import jakarta.ws.rs.ApplicationPath;
 
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;

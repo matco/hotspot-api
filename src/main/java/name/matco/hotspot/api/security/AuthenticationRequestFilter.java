@@ -3,18 +3,19 @@ package name.matco.hotspot.api.security;
 import java.lang.reflect.Method;
 import java.util.Optional;
 
-import javax.annotation.Priority;
-import javax.annotation.security.DenyAll;
-import javax.annotation.security.PermitAll;
-import javax.inject.Inject;
-import javax.ws.rs.Priorities;
-import javax.ws.rs.container.ContainerRequestContext;
-import javax.ws.rs.container.ContainerRequestFilter;
-import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.MultivaluedMap;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.Provider;
+import jakarta.annotation.Priority;
+import jakarta.annotation.security.DenyAll;
+import jakarta.annotation.security.PermitAll;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Priorities;
+import jakarta.ws.rs.container.ContainerRequestContext;
+import jakarta.ws.rs.container.ContainerRequestFilter;
+import jakarta.ws.rs.container.ResourceInfo;
+import jakarta.ws.rs.core.Context;
+import jakarta.ws.rs.core.HttpHeaders;
+import jakarta.ws.rs.core.MultivaluedMap;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.Provider;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.logging.log4j.Level;
@@ -74,7 +75,7 @@ public class AuthenticationRequestFilter implements ContainerRequestFilter {
 
 			//get authorization header
 			final MultivaluedMap<String, String> headers = context.getHeaders();
-			final String authorization = headers.getFirst(javax.ws.rs.core.HttpHeaders.AUTHORIZATION);
+			final String authorization = headers.getFirst(HttpHeaders.AUTHORIZATION);
 
 			//block access if there is no authorization
 			if(StringUtils.isEmpty(authorization)) {
@@ -105,7 +106,7 @@ public class AuthenticationRequestFilter implements ContainerRequestFilter {
 			/*if(method.isAnnotationPresent(RolesAllowed.class)) {
 				final RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
 				final Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
-
+			
 				//Is user valid?
 				if(!isUserAllowed(username, password, rolesSet)) {
 					context.abortWith(ACCESS_UNAUTHORIZED);

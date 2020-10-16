@@ -1,6 +1,6 @@
 package name.matco.hotspot.api.dto;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -9,19 +9,19 @@ import name.matco.hotspot.model.User;
 
 @JsonInclude(value = Include.NON_NULL)
 public class UserDto {
-	
+
 	@NotNull
 	private String handle;
-	
+
 	@NotNull
 	private String email;
 
 	@NotNull
 	private String password; //password field will be used during user registration
-	
+
 	@NotNull
 	private String firstname;
-	
+
 	@NotNull
 	private String lastname;
 
@@ -29,14 +29,14 @@ public class UserDto {
 		//required by serializer
 		//when coming from an HTTP client
 	}
-	
+
 	public UserDto(User user) {
 		handle = user.getHandle();
 		email = user.getEmail();
 		//do not expose password
 		firstname = user.getFirstname();
 		lastname = user.getLastname();
-	}	
+	}
 
 	public String getHandle() {
 		return handle;
@@ -77,5 +77,5 @@ public class UserDto {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-	
+
 }
