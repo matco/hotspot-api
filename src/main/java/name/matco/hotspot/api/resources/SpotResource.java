@@ -48,21 +48,6 @@ public class SpotResource {
 	@Context
 	private SecurityContext sc;
 
-	@QueryParam("pretty")
-	public void setPretty(final boolean pretty) {
-		if(pretty) {
-			ObjectWriterInjector.set(new ObjectWriterModifier() {
-				@Override
-				public ObjectWriter modify(final EndpointConfigBase<?> endpoint, final MultivaluedMap<String, Object> responseHeaders, final Object valueToWrite, final ObjectWriter w, final JsonGenerator g) throws IOException {
-					final DefaultPrettyPrinter pp = new DefaultPrettyPrinter();
-					pp.indentObjectsWith(new DefaultIndenter("\t", "\n"));
-					g.setPrettyPrinter(pp);
-					return w;
-				}
-			});
-		}
-	}
-
 	@GET
 	public List<Spot> allSpots(@QueryParam("search") final String search) {
 		final User user = (User) sc.getUserPrincipal();
