@@ -3,10 +3,6 @@ jobs:
   build:
     docker:
       - image: circleci/openjdk:13-jdk-buster
-    branches:
-      only:
-        - master
-        - dev
     steps:
       - checkout
       - restore_cache:
