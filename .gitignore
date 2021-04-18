@@ -1,5 +1,1 @@
-.*
-!/.circleci
-!/.settings
-!/.gitignore
 /target
