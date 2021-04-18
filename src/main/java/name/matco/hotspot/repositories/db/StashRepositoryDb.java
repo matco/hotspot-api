@@ -58,7 +58,7 @@ public class StashRepositoryDb implements StashRepository {
 
 	@Override
 	public List<Stash> search(final User user, final String search) {
-		final List<Stash> stashs = new ArrayList<>();
+		final List<Stash> stashes = new ArrayList<>();
 		StringBuilder sql = new StringBuilder("select * from stash where user_fk = ?");
 		if(StringUtils.isNotBlank(search)) {
 			sql.append(" and (name like ? or description like ?)");
@@ -78,13 +78,13 @@ public class StashRepositoryDb implements StashRepository {
 			}
 			final ResultSet result = statement.executeQuery();
 			while(result.next()) {
-				stashs.add(generateStash(result));
+				stashes.add(generateStash(result));
 			}
 		}
 		catch(final SQLException e) {
 			LOGGER.catching(Level.ERROR, e);
 		}
-		return stashs;
+		return stashes;
 	}
 
 	@Override

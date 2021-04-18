@@ -20,7 +20,7 @@ import name.matco.hotspot.model.Stash;
 
 public class StashResourceTest extends AuthenticatedTest {
 
-	public static String ENDPOINT = "stashs";
+	public static String ENDPOINT = "stashes";
 	public static GenericType<List<Stash>> STASHS_TYPE = new GenericType<List<Stash>>() {
 		//don't care
 	};
@@ -31,7 +31,7 @@ public class StashResourceTest extends AuthenticatedTest {
 		newStash.setName("City halls");
 		newStash.setDescription("Some beautiful city halls");
 
-		//try to retrieve stashs and create stash before login
+		//try to retrieve stashes and create stash before login
 		Response response = target(ENDPOINT).request().get();
 		assertEquals(Status.UNAUTHORIZED.getStatusCode(), response.getStatus());
 
@@ -41,11 +41,11 @@ public class StashResourceTest extends AuthenticatedTest {
 		create_user();
 		get_token();
 
-		//retrieve stashs
+		//retrieve stashes
 		response = target(ENDPOINT).request().get();
 		assertEquals(Status.OK.getStatusCode(), response.getStatus());
-		final List<Stash> stashs = response.readEntity(STASHS_TYPE);
-		assertTrue(stashs.isEmpty());
+		final List<Stash> stashes = response.readEntity(STASHS_TYPE);
+		assertTrue(stashes.isEmpty());
 
 		//create stash
 		response = target(ENDPOINT).request().post(Entity.entity(newStash, MediaType.APPLICATION_JSON));
@@ -55,8 +55,8 @@ public class StashResourceTest extends AuthenticatedTest {
 		assertTrue(responseStash.getUuid().matches("[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"));
 		assertEquals("City halls", responseStash.getName());
 
-		//retrieve stashs again, there is one more stash
-		assertEquals(stashs.size() + 1, target(ENDPOINT).request().get(STASHS_TYPE).size());
+		//retrieve stashes again, there is one more stash
+		assertEquals(stashes.size() + 1, target(ENDPOINT).request().get(STASHS_TYPE).size());
 
 		//get unexisting stash
 		response = target(ENDPOINT + "/" + UUID.randomUUID().toString()).request().get();
@@ -77,8 +77,8 @@ public class StashResourceTest extends AuthenticatedTest {
 		response = target(ENDPOINT + "/" + responseStash.getUuid()).request().delete();
 		assertEquals(Status.NO_CONTENT.getStatusCode(), response.getStatus());
 
-		//retrieve stashs again, there is one more stash
-		assertEquals(stashs.size(), target(ENDPOINT).request().get(STASHS_TYPE).size());
+		//retrieve stashes again, there is one more stash
+		assertEquals(stashes.size(), target(ENDPOINT).request().get(STASHS_TYPE).size());
 	}
 
 }

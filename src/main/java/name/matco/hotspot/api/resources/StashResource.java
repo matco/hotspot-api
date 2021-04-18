@@ -27,7 +27,7 @@ import name.matco.hotspot.model.User;
 import name.matco.hotspot.repositories.SpotRepository;
 import name.matco.hotspot.repositories.StashRepository;
 
-@Path("stashs")
+@Path("stashes")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class StashResource {
@@ -42,7 +42,7 @@ public class StashResource {
 	private SpotRepository spotRepository;
 
 	@GET
-	public List<Stash> allStashs(@QueryParam("search") final String search) {
+	public List<Stash> allStashes(@QueryParam("search") final String search) {
 		final User user = (User) sc.getUserPrincipal();
 		return stashRepository.search(user, search);
 	}
