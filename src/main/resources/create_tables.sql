@@ -1,4 +1,5 @@
-create table if not exists user (
+-- use "users" instead of "user" because "user" is a reserved keyword in some databases
+create table if not exists users (
 	pk integer not null auto_increment,
 	creation_date datetime not null default current_timestamp,
 	modification_date datetime not null default current_timestamp on update current_timestamp,
@@ -18,7 +19,7 @@ create table if not exists revoked_token (
 	expiration_date datetime not null,
 	user_fk integer not null,
 	primary key (token),
-	constraint revoked_token_user foreign key (user_fk) references user(pk)
+	constraint revoked_token_user foreign key (user_fk) references users(pk)
 ) engine=Memory default charset=utf8 collate=utf8_bin;
 
 create table if not exists stash (
@@ -31,7 +32,7 @@ create table if not exists stash (
 	description text,
 	primary key (pk),
 	unique key stash_uuid(uuid),
-	constraint stash_user foreign key (user_fk) references user(pk) on delete cascade
+	constraint stash_user foreign key (user_fk) references users(pk) on delete cascade
 ) engine=InnoDB default charset=utf8 collate=utf8_bin;
 
 create table if not exists spot (
@@ -46,7 +47,7 @@ create table if not exists spot (
 	description text,
 	primary key (pk),
 	unique key spot_uuid(uuid),
-	constraint spot_user foreign key (user_fk) references user(pk) on delete cascade
+	constraint spot_user foreign key (user_fk) references users(pk) on delete cascade
 ) engine=InnoDB default charset=utf8 collate=utf8_bin;
 
 create table if not exists stash_spot (

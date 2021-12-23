@@ -43,7 +43,7 @@ public class UserRepositoryDb implements UserRepository {
 		try(
 				final Connection connection = connectionProvider.getConnection();
 				final Statement statement = connection.createStatement();
-				final ResultSet result = statement.executeQuery("select * from user");) {
+				final ResultSet result = statement.executeQuery("select * from users");) {
 			while(result.next()) {
 				users.add(generateUser(result));
 			}
@@ -58,7 +58,7 @@ public class UserRepositoryDb implements UserRepository {
 	public Optional<User> getByEmail(final String email) {
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("select * from user where email = ? limit 1");) {
+				final PreparedStatement statement = connection.prepareStatement("select * from users where email = ? limit 1");) {
 			statement.setString(1, email);
 			final ResultSet result = statement.executeQuery();
 			while(result.next()) {
@@ -75,7 +75,7 @@ public class UserRepositoryDb implements UserRepository {
 	public Optional<User> getByHandle(final String handle) {
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("select * from user where handle = ? limit 1");) {
+				final PreparedStatement statement = connection.prepareStatement("select * from users where handle = ? limit 1");) {
 			statement.setString(1, handle);
 			final ResultSet result = statement.executeQuery();
 			while(result.next()) {
@@ -93,7 +93,7 @@ public class UserRepositoryDb implements UserRepository {
 		user.setHandle(generateHandle(user));
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("insert into user (handle, email, password, firstname, lastname) values (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);) {
+				final PreparedStatement statement = connection.prepareStatement("insert into users (handle, email, password, firstname, lastname) values (?, ?, ?, ?, ?)", Statement.RETURN_GENERATED_KEYS);) {
 			statement.setString(1, user.getHandle());
 			statement.setString(2, user.getEmail());
 			statement.setString(3, user.getPassword());
@@ -116,7 +116,7 @@ public class UserRepositoryDb implements UserRepository {
 	public boolean update(final User user) {
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("update user set email = ?, password = ?, firstname = ?, lastname = ? where handle = ?");) {
+				final PreparedStatement statement = connection.prepareStatement("update users set email = ?, password = ?, firstname = ?, lastname = ? where handle = ?");) {
 			statement.setString(1, user.getEmail());
 			statement.setString(2, user.getPassword());
 			statement.setString(3, user.getFirstname());
@@ -135,7 +135,7 @@ public class UserRepositoryDb implements UserRepository {
 	public boolean delete(final User user) {
 		try(
 				final Connection connection = connectionProvider.getConnection();
-				final PreparedStatement statement = connection.prepareStatement("delete from user where handle = ? limit 1");) {
+				final PreparedStatement statement = connection.prepareStatement("delete from users where handle = ? limit 1");) {
 			statement.setString(1, user.getHandle());
 			statement.executeUpdate();
 			return true;
