@@ -7,6 +7,7 @@ import org.glassfish.hk2.utilities.binding.AbstractBinder;
 import name.matco.hotspot.api.security.tokens.JWTService;
 import name.matco.hotspot.api.security.tokens.RevokedTokenCleaner;
 import name.matco.hotspot.api.security.tokens.RevokedTokenRepository;
+import name.matco.hotspot.api.security.tokens.RevokedTokenRepositoryDb;
 import name.matco.hotspot.repositories.SpotRepository;
 import name.matco.hotspot.repositories.StashRepository;
 import name.matco.hotspot.repositories.UserRepository;
@@ -26,7 +27,7 @@ public class AppBinder extends AbstractBinder {
 		bind(StashRepositoryDb.class).to(StashRepository.class).in(Singleton.class);
 		bind(SpotRepositoryDb.class).to(SpotRepository.class).in(Singleton.class);
 		//api
-		bind(RevokedTokenRepository.class).to(RevokedTokenRepository.class).in(Singleton.class);
+		bind(RevokedTokenRepositoryDb.class).to(RevokedTokenRepository.class).in(Singleton.class);
 		bind(RevokedTokenCleaner.class).to(RevokedTokenCleaner.class).in(Singleton.class);
 		bind(JWTService.class).to(JWTService.class).in(Singleton.class);
 	}

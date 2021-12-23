@@ -9,9 +9,11 @@ import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;
 
+import name.matco.hotspot.api.security.tokens.RevokedTokenRepository;
 import name.matco.hotspot.repositories.SpotRepository;
 import name.matco.hotspot.repositories.StashRepository;
 import name.matco.hotspot.repositories.UserRepository;
+import name.matco.hotspot.repositories.mocks.RevokedTokenRepositoryMock;
 import name.matco.hotspot.repositories.mocks.SpotRepositoryMock;
 import name.matco.hotspot.repositories.mocks.StashRepositoryMock;
 import name.matco.hotspot.repositories.mocks.UserRepositoryMock;
@@ -24,6 +26,7 @@ public class APITest extends JerseyTest {
 		config.register(new AbstractBinder() {
 			@Override
 			protected void configure() {
+				bind(RevokedTokenRepositoryMock.class).to(RevokedTokenRepository.class).in(Singleton.class).ranked(100);
 				bind(UserRepositoryMock.class).to(UserRepository.class).in(Singleton.class).ranked(100);
 				bind(StashRepositoryMock.class).to(StashRepository.class).in(Singleton.class).ranked(100);
 				bind(SpotRepositoryMock.class).to(SpotRepository.class).in(Singleton.class).ranked(100);
