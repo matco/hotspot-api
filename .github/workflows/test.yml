@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the project
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Set up the JDK
         uses: actions/setup-java@v2
         with:
@@ -27,7 +27,7 @@ jobs:
       - name: Create application package
         run: mvn -B package
       - name: Store test reports
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: reports
           path: target/surefire-reports
