@@ -21,7 +21,7 @@ import name.matco.hotspot.model.Stash;
 public class StashResourceTest extends AuthenticatedTest {
 
 	public static String ENDPOINT = "stashes";
-	public static GenericType<List<Stash>> STASHS_TYPE = new GenericType<List<Stash>>() {
+	public static GenericType<List<Stash>> STASHS_TYPE = new GenericType<>() {
 		//don't care
 	};
 

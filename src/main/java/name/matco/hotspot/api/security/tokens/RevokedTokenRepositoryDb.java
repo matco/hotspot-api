@@ -1,7 +1,5 @@
 package name.matco.hotspot.api.security.tokens;
 
-import static name.matco.hotspot.model.jooq.Tables.REVOKED_TOKEN;
-
 import java.util.Optional;
 
 import jakarta.inject.Inject;
@@ -9,6 +7,8 @@ import jakarta.inject.Inject;
 import org.jooq.DSLContext;
 
 import name.matco.hotspot.model.jooq.tables.records.RevokedTokenRecord;
+
+import static name.matco.hotspot.model.jooq.Tables.REVOKED_TOKEN;
 
 public class RevokedTokenRepositoryDb implements RevokedTokenRepository {
 
@@ -22,7 +22,7 @@ public class RevokedTokenRepositoryDb implements RevokedTokenRepository {
 
 	@Override
 	public void save(final RevokedToken revokedToken) {
-		var revokedTokenRecord = new RevokedTokenRecord();
+		final var revokedTokenRecord = new RevokedTokenRecord();
 		revokedTokenRecord.from(revokedToken);
 		dsl.insertInto(REVOKED_TOKEN).set(revokedTokenRecord).execute();
 	}

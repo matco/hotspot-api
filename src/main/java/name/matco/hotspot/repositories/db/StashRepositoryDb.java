@@ -1,7 +1,5 @@
 package name.matco.hotspot.repositories.db;
 
-import static name.matco.hotspot.model.jooq.Tables.STASH;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +16,8 @@ import name.matco.hotspot.model.User;
 import name.matco.hotspot.model.jooq.tables.records.StashRecord;
 import name.matco.hotspot.repositories.StashRepository;
 
+import static name.matco.hotspot.model.jooq.Tables.STASH;
+
 public class StashRepositoryDb implements StashRepository {
 
 	@Inject
@@ -30,7 +30,7 @@ public class StashRepositoryDb implements StashRepository {
 
 	@Override
 	public List<Stash> search(final User user, final String search) {
-		var conditions = new ArrayList<Condition>();
+		final var conditions = new ArrayList<Condition>();
 		conditions.add(STASH.USER_FK.eq(user.getPk()));
 		if(StringUtils.isNotBlank(search)) {
 			conditions.add(STASH.NAME.containsIgnoreCase(search).or(STASH.DESCRIPTION.containsIgnoreCase(search)));
@@ -41,9 +41,9 @@ public class StashRepositoryDb implements StashRepository {
 	@Override
 	public void save(final Stash stash) {
 		stash.setUuid(UUID.randomUUID().toString());
-		var stashRecord = new StashRecord();
+		final var stashRecord = new StashRecord();
 		stashRecord.from(stash);
-		var pk = dsl.insertInto(STASH).set(stashRecord).returningResult(STASH.PK).fetchOne();
+		final var pk = dsl.insertInto(STASH).set(stashRecord).returningResult(STASH.PK).fetchOne();
 		stash.setPk(pk.value1());
 	}
 

@@ -1,7 +1,5 @@
 package name.matco.hotspot.api.security.tokens;
 
-import static name.matco.hotspot.model.jooq.Tables.REVOKED_TOKEN;
-
 import java.time.ZonedDateTime;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -13,6 +11,8 @@ import jakarta.inject.Inject;
 
 import org.jooq.DSLContext;
 
+import static name.matco.hotspot.model.jooq.Tables.REVOKED_TOKEN;
+
 public class RevokedTokenCleaner {
 
 	private static final int TOKEN_CHECK_INTERVAL = 60; //in seconds
@@ -20,13 +20,13 @@ public class RevokedTokenCleaner {
 	@Inject
 	private DSLContext dsl;
 
-	private ScheduledExecutorService cleaner;
+	private final ScheduledExecutorService cleaner;
 
 	public RevokedTokenCleaner() {
 		cleaner = Executors.newSingleThreadScheduledExecutor();
 
 		final Runnable clean = () -> {
-			var result = dsl.deleteFrom(REVOKED_TOKEN).where(REVOKED_TOKEN.EXPIRATION_DATE.greaterThan(ZonedDateTime.now())).execute();
+			final var result = dsl.deleteFrom(REVOKED_TOKEN).where(REVOKED_TOKEN.EXPIRATION_DATE.greaterThan(ZonedDateTime.now())).execute();
 			if(result > 0) {
 				Logger.getLogger(ScheduledExecutorService.class.getName()).log(Level.INFO, "Cleaner removed " + result + " revoked token(s).");
 			}

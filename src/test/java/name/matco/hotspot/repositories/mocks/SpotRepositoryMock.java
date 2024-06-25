@@ -16,8 +16,8 @@ import name.matco.hotspot.repositories.SpotRepository;
 
 public class SpotRepositoryMock implements SpotRepository {
 
-	private Set<Spot> spots = new HashSet<>();
-	private Set<Pair<Stash, Spot>> stashSpots = new HashSet<>();
+	private final Set<Spot> spots = new HashSet<>();
+	private final Set<Pair<Stash, Spot>> stashSpots = new HashSet<>();
 	private int pk = 1;
 
 	@Override
@@ -32,9 +32,7 @@ public class SpotRepositoryMock implements SpotRepository {
 
 	@Override
 	public List<Spot> search(final User user, final String search) {
-		final Predicate<Spot> predicate = (Spot s) -> {
-			return s.getUserFk() == user.getPk() && MockHelper.testSearch(s, search);
-		};
+		final Predicate<Spot> predicate = (final Spot s) -> (s.getUserFk() == user.getPk() && MockHelper.testSearch(s, search));
 		return spots.stream().filter(predicate).collect(Collectors.toList());
 	}
 

@@ -38,7 +38,7 @@ public class MeResource {
 
 	@Path("/password")
 	@POST
-	public Response updatePassord(PasswordUpdate passwordUpdate) throws Exception {
+	public Response updatePassord(final PasswordUpdate passwordUpdate) throws Exception {
 		final User user = (User) sc.getUserPrincipal();
 		if(user.checkPassword(passwordUpdate.currentPassword)) {
 			user.setPlainTextPassword(passwordUpdate.newPassword);

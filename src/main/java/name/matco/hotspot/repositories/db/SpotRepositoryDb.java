@@ -1,8 +1,5 @@
 package name.matco.hotspot.repositories.db;
 
-import static name.matco.hotspot.model.jooq.Tables.SPOT;
-import static name.matco.hotspot.model.jooq.Tables.STASH_SPOT;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +18,9 @@ import name.matco.hotspot.model.jooq.tables.records.SpotRecord;
 import name.matco.hotspot.model.jooq.tables.records.StashSpotRecord;
 import name.matco.hotspot.repositories.SpotRepository;
 
+import static name.matco.hotspot.model.jooq.Tables.SPOT;
+import static name.matco.hotspot.model.jooq.Tables.STASH_SPOT;
+
 public class SpotRepositoryDb implements SpotRepository {
 
 	@Inject
@@ -38,7 +38,7 @@ public class SpotRepositoryDb implements SpotRepository {
 
 	@Override
 	public List<Spot> search(final User user, final String search) {
-		var conditions = new ArrayList<Condition>();
+		final var conditions = new ArrayList<Condition>();
 		conditions.add(SPOT.USER_FK.eq(user.getPk()));
 		if(StringUtils.isNotBlank(search)) {
 			conditions.add(SPOT.NAME.containsIgnoreCase(search).or(SPOT.DESCRIPTION.containsIgnoreCase(search)));
@@ -49,9 +49,9 @@ public class SpotRepositoryDb implements SpotRepository {
 	@Override
 	public void save(final Spot spot) {
 		spot.setUuid(UUID.randomUUID().toString());
-		var spotRecord = new SpotRecord();
+		final var spotRecord = new SpotRecord();
 		spotRecord.from(spot);
-		var pk = dsl.insertInto(SPOT).set(spotRecord).returningResult(SPOT.PK).fetchOne();
+		final var pk = dsl.insertInto(SPOT).set(spotRecord).returningResult(SPOT.PK).fetchOne();
 		spot.setPk(pk.value1());
 	}
 
@@ -78,7 +78,7 @@ public class SpotRepositoryDb implements SpotRepository {
 
 	@Override
 	public void addToStash(final Stash stash, final Spot spot) {
-		var stashSpotRecord = new StashSpotRecord(stash.getPk(), spot.getPk());
+		final var stashSpotRecord = new StashSpotRecord(stash.getPk(), spot.getPk());
 		dsl.insertInto(STASH_SPOT).set(stashSpotRecord).execute();
 	}
 

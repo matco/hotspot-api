@@ -13,16 +13,16 @@ public class StashRepositoryTest extends RepositoryTest {
 
 	@Test
 	public void test() {
-		User user = new User();
+		final User user = new User();
 		user.setFirstname("John");
 		user.setLastname("Doe");
 		user.setEmail("john@doe.com");
-		UserRepository userRepository = LOCATOR.getService(UserRepository.class);
+		final UserRepository userRepository = LOCATOR.getService(UserRepository.class);
 		userRepository.save(user);
 
-		StashRepository stashRepository = LOCATOR.getService(StashRepositoryDb.class);
+		final StashRepository stashRepository = LOCATOR.getService(StashRepositoryDb.class);
 
-		Stash stash = new Stash();
+		final Stash stash = new Stash();
 		stash.setUserFk(user.getPk());
 		stash.setName("City halls");
 		stash.setDescription("Nearby city halls");

@@ -71,7 +71,7 @@ public class SpotResource {
 	@Path(App.RESOURCE_UUID_PATH)
 	public Response updateSpot(@PathParam("uuid") final String uuid, final Spot spotDto) {
 		final User user = (User) sc.getUserPrincipal();
-		var spot = spotRepository.getByUuid(uuid).orElseThrow(() -> new NotFoundException());
+		final var spot = spotRepository.getByUuid(uuid).orElseThrow(NotFoundException::new);
 		if(spot.getUserFk() == user.getPk()) {
 			spot.setName(spotDto.getName());
 			spot.setDescription(spotDto.getDescription());

@@ -20,7 +20,7 @@ public class DSLContextFactoryMock implements Factory<DSLContext> {
 	}
 
 	@Override
-	public void dispose(DSLContext instance) {
+	public void dispose(final DSLContext instance) {
 		//nothing to do here
 	}
 }

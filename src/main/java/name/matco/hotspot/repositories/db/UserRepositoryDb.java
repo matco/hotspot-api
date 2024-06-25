@@ -1,7 +1,5 @@
 package name.matco.hotspot.repositories.db;
 
-import static name.matco.hotspot.model.jooq.Tables.USERS;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,6 +10,8 @@ import org.jooq.DSLContext;
 import name.matco.hotspot.model.User;
 import name.matco.hotspot.model.jooq.tables.records.UsersRecord;
 import name.matco.hotspot.repositories.UserRepository;
+
+import static name.matco.hotspot.model.jooq.Tables.USERS;
 
 public class UserRepositoryDb implements UserRepository {
 
@@ -36,9 +36,9 @@ public class UserRepositoryDb implements UserRepository {
 	@Override
 	public void save(final User user) {
 		user.setHandle(generateHandle(user));
-		var userRecord = new UsersRecord();
+		final var userRecord = new UsersRecord();
 		userRecord.from(user);
-		var pk = dsl.insertInto(USERS).set(userRecord).returningResult(USERS.PK).fetchOne();
+		final var pk = dsl.insertInto(USERS).set(userRecord).returningResult(USERS.PK).fetchOne();
 		user.setPk(pk.value1());
 	}
 

@@ -9,15 +9,15 @@ import name.matco.hotspot.api.security.tokens.RevokedTokenRepository;
 
 public class RevokedTokenRepositoryMock implements RevokedTokenRepository {
 
-	private Set<RevokedToken> revokedTokens = new HashSet<>();
+	private final Set<RevokedToken> revokedTokens = new HashSet<>();
 
 	@Override
-	public Optional<RevokedToken> getByToken(String token) {
+	public Optional<RevokedToken> getByToken(final String token) {
 		return revokedTokens.stream().filter(t -> t.getToken().equals(token)).findAny();
 	}
 
 	@Override
-	public void save(RevokedToken revokedToken) {
+	public void save(final RevokedToken revokedToken) {
 		revokedTokens.add(revokedToken);
 	}
 

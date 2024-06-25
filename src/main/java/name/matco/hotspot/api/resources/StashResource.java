@@ -71,7 +71,7 @@ public class StashResource {
 	@Path(App.RESOURCE_UUID_PATH)
 	public Response updateStash(@PathParam("uuid") final String uuid, final Stash stashDto) {
 		final User user = (User) sc.getUserPrincipal();
-		var stash = stashRepository.getByUuid(uuid).orElseThrow(() -> new NotFoundException());
+		final var stash = stashRepository.getByUuid(uuid).orElseThrow(NotFoundException::new);
 		if(stash.getUserFk() == user.getPk()) {
 			stash.setName(stashDto.getName());
 			stash.setDescription(stashDto.getDescription());

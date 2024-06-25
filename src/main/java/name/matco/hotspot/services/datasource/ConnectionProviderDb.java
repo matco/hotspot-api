@@ -12,7 +12,7 @@ import name.matco.hotspot.api.App;
 
 public class ConnectionProviderDb implements ConnectionProvider {
 
-	private HikariDataSource ds;
+	private final HikariDataSource ds;
 
 	public ConnectionProviderDb() {
 		final Properties properties = App.getAppProperties();

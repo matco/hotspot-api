@@ -11,11 +11,11 @@ public class UserTest {
 
 	@Test
 	public void test_password_hash() {
-		var password = "password";
+		final var password = "password";
 		final User user = new User();
 		user.setPlainTextPassword(password);
 
-		var encryptedPassword = user.getPassword();
+		final var encryptedPassword = user.getPassword();
 		assertNotNull(encryptedPassword);
 		assertNotEquals(password, encryptedPassword);
 

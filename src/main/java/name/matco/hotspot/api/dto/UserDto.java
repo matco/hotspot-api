@@ -30,7 +30,7 @@ public class UserDto {
 		//when coming from an HTTP client
 	}
 
-	public UserDto(User user) {
+	public UserDto(final User user) {
 		handle = user.getHandle();
 		email = user.getEmail();
 		//do not expose password
@@ -42,7 +42,7 @@ public class UserDto {
 		return handle;
 	}
 
-	public void setHandle(String handle) {
+	public void setHandle(final String handle) {
 		this.handle = handle;
 	}
 
@@ -50,7 +50,7 @@ public class UserDto {
 		return email;
 	}
 
-	public void setEmail(String email) {
+	public void setEmail(final String email) {
 		this.email = email;
 	}
 
@@ -58,7 +58,7 @@ public class UserDto {
 		return password;
 	}
 
-	public void setPassword(String password) {
+	public void setPassword(final String password) {
 		this.password = password;
 	}
 
@@ -66,7 +66,7 @@ public class UserDto {
 		return firstname;
 	}
 
-	public void setFirstname(String firstname) {
+	public void setFirstname(final String firstname) {
 		this.firstname = firstname;
 	}
 
@@ -74,7 +74,7 @@ public class UserDto {
 		return lastname;
 	}
 
-	public void setLastname(String lastname) {
+	public void setLastname(final String lastname) {
 		this.lastname = lastname;
 	}
 

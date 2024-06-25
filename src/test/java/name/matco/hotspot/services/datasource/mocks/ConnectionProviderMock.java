@@ -12,7 +12,7 @@ import name.matco.hotspot.services.datasource.ConnectionProvider;
 
 public class ConnectionProviderMock implements ConnectionProvider {
 
-	private HikariDataSource ds;
+	private final HikariDataSource ds;
 
 	public ConnectionProviderMock() {
 		ds = new HikariDataSource();

@@ -13,7 +13,7 @@ public class AppSecurityContext implements SecurityContext {
 	@Inject
 	UserRepository userRepository;
 
-	private User user;
+	private final User user;
 
 	public AppSecurityContext(final User user) {
 		this.user = user;

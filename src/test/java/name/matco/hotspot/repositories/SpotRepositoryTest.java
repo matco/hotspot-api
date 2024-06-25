@@ -12,16 +12,16 @@ public class SpotRepositoryTest extends RepositoryTest {
 
 	@Test
 	public void test() {
-		User user = new User();
+		final User user = new User();
 		user.setFirstname("John");
 		user.setLastname("Doe");
 		user.setEmail("john@doe.com");
-		UserRepository userRepository = LOCATOR.getService(UserRepository.class);
+		final UserRepository userRepository = LOCATOR.getService(UserRepository.class);
 		userRepository.save(user);
 
-		SpotRepository spotRepository = LOCATOR.getService(SpotRepository.class);
+		final SpotRepository spotRepository = LOCATOR.getService(SpotRepository.class);
 
-		Spot spot = new Spot();
+		final Spot spot = new Spot();
 		spot.setUserFk(user.getPk());
 		spot.setName("Annecy city hall");
 		spot.setDescription("The city hall of Annecy");

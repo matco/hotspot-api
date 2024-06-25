@@ -38,8 +38,7 @@ public class AuthenticationRequestFilter implements ContainerRequestFilter {
 	private static final Logger LOGGER = LogManager.getLogger(AuthenticationRequestFilter.class.getName());
 
 	public static String retrieveToken(final String authorizationHeader) {
-		final String encodedToken = authorizationHeader.replaceFirst("Bearer ", "");
-		return encodedToken;
+		return authorizationHeader.replaceFirst("Bearer ", "");
 	}
 
 	public static String generateHeader(final String token) {
@@ -106,7 +105,7 @@ public class AuthenticationRequestFilter implements ContainerRequestFilter {
 			/*if(method.isAnnotationPresent(RolesAllowed.class)) {
 				final RolesAllowed rolesAnnotation = method.getAnnotation(RolesAllowed.class);
 				final Set<String> rolesSet = new HashSet<String>(Arrays.asList(rolesAnnotation.value()));
-			
+
 				//Is user valid?
 				if(!isUserAllowed(username, password, rolesSet)) {
 					context.abortWith(ACCESS_UNAUTHORIZED);

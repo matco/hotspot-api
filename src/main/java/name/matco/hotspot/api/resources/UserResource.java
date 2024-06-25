@@ -58,7 +58,7 @@ public class UserResource {
 		if(StringUtils.isAnyBlank(userDto.getFirstname(), userDto.getLastname(), userDto.getEmail(), userDto.getPassword())) {
 			throw new BadRequestException("First name, last name, email and password are required");
 		}
-		var user = new User();
+		final var user = new User();
 		user.setFirstname(userDto.getFirstname());
 		user.setLastname(userDto.getLastname());
 		user.setEmail(userDto.getEmail());

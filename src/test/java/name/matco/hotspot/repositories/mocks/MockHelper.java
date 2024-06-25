@@ -6,7 +6,7 @@ import name.matco.hotspot.model.Displayable;
 
 public class MockHelper {
 
-	public static boolean testSearch(Displayable displayable, String search) {
+	public static boolean testSearch(final Displayable displayable, final String search) {
 		if(StringUtils.isNotBlank(search)) {
 			return StringUtils.containsIgnoreCase(displayable.getName(), search) || StringUtils.containsIgnoreCase(displayable.getDescription(), search);
 		}

@@ -11,12 +11,12 @@ import name.matco.hotspot.repositories.UserRepository;
 
 public class UserRepositoryMock implements UserRepository {
 
-	private Set<User> users = new HashSet<>();
+	private final Set<User> users = new HashSet<>();
 	private int pk = 1;
 
 	@Override
 	public List<User> getAll() {
-		return new ArrayList<User>(users);
+		return new ArrayList<>(users);
 	}
 
 	@Override

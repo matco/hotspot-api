@@ -23,7 +23,7 @@ import name.matco.hotspot.model.Spot;
 public class SpotResourceTest extends AuthenticatedTest {
 
 	public static String ENDPOINT = "spots";
-	public static GenericType<List<Spot>> SPOTS_TYPE = new GenericType<List<Spot>>() {
+	public static GenericType<List<Spot>> SPOTS_TYPE = new GenericType<>() {
 		//don't care
 	};
 
@@ -34,7 +34,7 @@ public class SpotResourceTest extends AuthenticatedTest {
 		newSpot.setLatitude(45.8990465d);
 		newSpot.setLongitude(6.1286562d);
 		newSpot.setDescription("The city hall of Annecy");
-		newSpot.setLabels(new HashSet<String>(Arrays.asList("by-the-lake", "big-house")));
+		newSpot.setLabels(new HashSet<>(Arrays.asList("by-the-lake", "big-house")));
 
 		//try to retrieve spots and create spot before login
 		Response response = target(ENDPOINT).request().get();

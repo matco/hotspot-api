@@ -13,7 +13,7 @@ import name.matco.hotspot.repositories.StashRepository;
 
 public class StashRepositoryMock implements StashRepository {
 
-	private Set<Stash> stashes = new HashSet<>();
+	private final Set<Stash> stashes = new HashSet<>();
 	private int pk = 1;
 
 	@Override
@@ -23,9 +23,7 @@ public class StashRepositoryMock implements StashRepository {
 
 	@Override
 	public List<Stash> search(final User user, final String search) {
-		final Predicate<Stash> predicate = (Stash s) -> {
-			return s.getUserFk() == user.getPk() && MockHelper.testSearch(s, search);
-		};
+		final Predicate<Stash> predicate = (final Stash s) -> (s.getUserFk() == user.getPk() && MockHelper.testSearch(s, search));
 		return stashes.stream().filter(predicate).collect(Collectors.toList());
 	}
 

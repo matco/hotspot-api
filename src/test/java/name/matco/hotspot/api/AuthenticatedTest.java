@@ -1,10 +1,8 @@
 package name.matco.hotspot.api;
 
-import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
-import jakarta.ws.rs.client.ClientRequestContext;
 import jakarta.ws.rs.client.ClientRequestFilter;
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.GenericType;
@@ -25,7 +23,7 @@ public class AuthenticatedTest extends APITest {
 	public static final String USER_EMAIL = "john@doe.name";
 	public static final String USER_PASSWORD = "password";
 
-	public static final GenericType<Map<String, String>> TOKEN_TYPE = new GenericType<Map<String, String>>() {
+	public static final GenericType<Map<String, String>> TOKEN_TYPE = new GenericType<>() {
 		//don't care
 	};
 
@@ -36,19 +34,16 @@ public class AuthenticatedTest extends APITest {
 	@Override
 	public void configureClient(final ClientConfig config) {
 		super.configureClient(config);
-		config.register(new ClientRequestFilter() {
-			@Override
-			public void filter(final ClientRequestContext requestContext) throws IOException {
-				if(StringUtils.isNoneBlank(token)) {
-					final String header = AuthenticationRequestFilter.generateHeader(token);
-					requestContext.getHeaders().put(HttpHeaders.AUTHORIZATION, Collections.singletonList(header));
-				}
+		config.register((ClientRequestFilter) requestContext -> {
+			if(StringUtils.isNoneBlank(token)) {
+				final String header = AuthenticationRequestFilter.generateHeader(token);
+				requestContext.getHeaders().put(HttpHeaders.AUTHORIZATION, Collections.singletonList(header));
 			}
 		});
 	}
 
 	public void create_user() {
-		var newUser = new UserDto();
+		final var newUser = new UserDto();
 		newUser.setFirstname(USER_FIRSTNAME);
 		newUser.setLastname(USER_LASTNAME);
 		newUser.setEmail(USER_EMAIL);

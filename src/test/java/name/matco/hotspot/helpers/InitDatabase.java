@@ -32,11 +32,8 @@ public class InitDatabase {
 			try {
 				while((line = input.readLine()) != null) {
 					//empty lines
-					if(line.trim().isEmpty()) {
-						continue;
-					}
 					//inline comment
-					if(line.startsWith("--")) {
+					if(line.trim().isEmpty() || line.startsWith("--")) {
 						continue;
 					}
 					//start multiline comment
