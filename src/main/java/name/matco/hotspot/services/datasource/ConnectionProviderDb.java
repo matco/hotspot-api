@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import javax.sql.DataSource;
+
 import com.zaxxer.hikari.HikariDataSource;
 
 import name.matco.hotspot.api.App;
@@ -20,6 +22,12 @@ public class ConnectionProviderDb implements ConnectionProvider {
 		ds.setPassword(properties.getProperty("db.password"));
 	}
 
+	@Override
+	public DataSource getDataSource() {
+		return ds;
+	}
+
+	@Override
 	public Connection getConnection() throws SQLException {
 		return ds.getConnection();
 	}

@@ -18,7 +18,7 @@ public class SpotRepositoryMock implements SpotRepository {
 
 	private Set<Spot> spots = new HashSet<>();
 	private Set<Pair<Stash, Spot>> stashSpots = new HashSet<>();
-	private long pk = 1;
+	private int pk = 1;
 
 	@Override
 	public Optional<Spot> getByUuid(final String uuid) {
@@ -39,23 +39,20 @@ public class SpotRepositoryMock implements SpotRepository {
 	}
 
 	@Override
-	public boolean save(final Spot spot) {
+	public void save(final Spot spot) {
 		spots.add(spot);
 		spot.setPk(pk++);
-		return true;
 	}
 
 	@Override
-	public boolean update(final Spot spot) {
+	public void update(final Spot spot) {
 		final Spot oldSpot = getByUuid(spot.getUuid()).get();
 		oldSpot.setName(spot.getName());
-		return true;
 	}
 
 	@Override
-	public boolean delete(final Spot spot) {
+	public void delete(final Spot spot) {
 		spots.remove(spot);
-		return true;
 	}
 
 	@Override

@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Stash implements Displayable {
 
 	@NotNull
-	private long pk;
+	private int pk;
 
 	@NotNull
-	private long userFk;
+	private int userFk;
 
 	@NotNull
 	private String uuid;
@@ -28,19 +28,19 @@ public class Stash implements Displayable {
 
 	private Set<Spot> spots;
 
-	public final long getPk() {
+	public final int getPk() {
 		return pk;
 	}
 
-	public final void setPk(final long pk) {
+	public final void setPk(final int pk) {
 		this.pk = pk;
 	}
 
-	public final long getUserFk() {
+	public final int getUserFk() {
 		return userFk;
 	}
 
-	public final void setUserFk(final long userFk) {
+	public final void setUserFk(final int userFk) {
 		this.userFk = userFk;
 	}
 

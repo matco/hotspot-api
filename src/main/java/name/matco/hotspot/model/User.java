@@ -14,7 +14,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 public class User implements Principal {
 
 	@NotNull
-	private long pk;
+	private int pk;
 
 	@NotNull
 	private String handle;
@@ -31,11 +31,11 @@ public class User implements Principal {
 	@NotNull
 	private String lastname;
 
-	public final long getPk() {
+	public final int getPk() {
 		return pk;
 	}
 
-	public final void setPk(final long pk) {
+	public final void setPk(final int pk) {
 		this.pk = pk;
 	}
 

@@ -12,10 +12,10 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 public class Spot implements Displayable {
 
 	@NotNull
-	private long pk;
+	private int pk;
 
 	@NotNull
-	private long userFk;
+	private int userFk;
 
 	@NotNull
 	private String uuid;
@@ -34,19 +34,19 @@ public class Spot implements Displayable {
 
 	private Set<String> labels;
 
-	public final long getPk() {
+	public final int getPk() {
 		return pk;
 	}
 
-	public final void setPk(final long pk) {
+	public final void setPk(final int pk) {
 		this.pk = pk;
 	}
 
-	public final long getUserFk() {
+	public final int getUserFk() {
 		return userFk;
 	}
 
-	public final void setUserFk(final long userFk) {
+	public final void setUserFk(final int userFk) {
 		this.userFk = userFk;
 	}
 

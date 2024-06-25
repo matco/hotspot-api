@@ -14,7 +14,7 @@ import name.matco.hotspot.repositories.StashRepository;
 public class StashRepositoryMock implements StashRepository {
 
 	private Set<Stash> stashes = new HashSet<>();
-	private long pk = 1;
+	private int pk = 1;
 
 	@Override
 	public Optional<Stash> getByUuid(final String uuid) {
@@ -30,23 +30,20 @@ public class StashRepositoryMock implements StashRepository {
 	}
 
 	@Override
-	public boolean save(final Stash stash) {
+	public void save(final Stash stash) {
 		stashes.add(stash);
 		stash.setPk(pk++);
-		return true;
 	}
 
 	@Override
-	public boolean update(final Stash stash) {
+	public void update(final Stash stash) {
 		final Stash oldStash = getByUuid(stash.getUuid()).get();
 		oldStash.setName(stash.getName());
-		return true;
 	}
 
 	@Override
-	public boolean delete(final Stash stash) {
+	public void delete(final Stash stash) {
 		stashes.remove(stash);
-		return true;
 	}
 
 }

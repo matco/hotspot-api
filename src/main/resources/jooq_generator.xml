@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<configuration
+	xmlns="http://www.jooq.org/xsd/jooq-codegen-3.16.6.xsd">
+	<!-- Configure the database connection here -->
+	<jdbc>
+		<driver>org.mariadb.jdbc.Driver</driver>
+		<url>jdbc:mariadb://localhost:3306</url>
+		<user>root</user>
+		<password>root</password>
+	</jdbc>
+
+	<generator>
+		<database>
+			<name>org.jooq.meta.mariadb.MariaDBDatabase</name>
+
+			<!-- The database schema (or in the absence of schema support, in your 
+				RDBMS this can be the owner, user, database name) to be generated -->
+			<inputSchema>hotspot</inputSchema>
+			<!-- tells jOOQ that this will be the default schema hence removing the database prefix from all generated classes -->
+			<outputSchemaToDefault>true</outputSchemaToDefault>
+
+			<forcedTypes>
+				<forcedType>
+					<userType>java.time.ZonedDateTime</userType>
+					<converter>name.matco.hotspot.services.jooq.configuration.DateConverter</converter>
+					<includeTypes>DATETIME</includeTypes>
+				</forcedType>
+			</forcedTypes>
+		</database>
+
+		<generate>
+			<sources>true</sources>
+			<sourcesOnViews>true</sourcesOnViews>
+			<javaTimeTypes>true</javaTimeTypes>
+			<indentation>\t</indentation>
+		</generate>
+	
+		<target>
+			<encoding>UTF-8</encoding>
+			<directory>src/main/java</directory>
+			<packageName>name.matco.hotspot.model.jooq</packageName>
+		</target>
+	</generator>
+
+</configuration>

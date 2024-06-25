@@ -12,9 +12,9 @@ public interface StashRepository {
 
 	List<Stash> search(User user, String search);
 
-	boolean save(Stash stash);
+	void save(Stash stash);
 
-	boolean delete(Stash stash);
+	void delete(Stash stash);
 
-	boolean update(Stash stash);
+	void update(Stash stash);
 }

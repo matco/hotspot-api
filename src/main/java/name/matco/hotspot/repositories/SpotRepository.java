@@ -15,11 +15,11 @@ public interface SpotRepository {
 
 	List<Spot> search(User user, String search);
 
-	boolean save(Spot spot);
+	void save(Spot spot);
 
-	boolean delete(Spot spot);
+	void delete(Spot spot);
 
-	boolean update(Spot spot);
+	void update(Spot spot);
 
 	List<Spot> getByStash(Stash stash);
 

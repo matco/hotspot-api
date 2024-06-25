@@ -17,8 +17,8 @@ public class RevokedTokenRepositoryMock implements RevokedTokenRepository {
 	}
 
 	@Override
-	public boolean save(RevokedToken revokedToken) {
-		return revokedTokens.add(revokedToken);
+	public void save(RevokedToken revokedToken) {
+		revokedTokens.add(revokedToken);
 	}
 
 }

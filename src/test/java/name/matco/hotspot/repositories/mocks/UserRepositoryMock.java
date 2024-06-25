@@ -12,7 +12,7 @@ import name.matco.hotspot.repositories.UserRepository;
 public class UserRepositoryMock implements UserRepository {
 
 	private Set<User> users = new HashSet<>();
-	private long pk = 1;
+	private int pk = 1;
 
 	@Override
 	public List<User> getAll() {
@@ -30,24 +30,21 @@ public class UserRepositoryMock implements UserRepository {
 	}
 
 	@Override
-	public boolean save(final User user) {
+	public void save(final User user) {
 		users.add(user);
 		user.setPk(pk++);
-		return true;
 	}
 
 	@Override
-	public boolean update(final User user) {
+	public void update(final User user) {
 		final User oldUser = getByHandle(user.getHandle()).get();
 		oldUser.setFirstname(user.getFirstname());
 		oldUser.setLastname(user.getLastname());
-		return true;
 	}
 
 	@Override
-	public boolean delete(final User user) {
+	public void delete(final User user) {
 		users.remove(user);
-		return true;
 	}
 
 }

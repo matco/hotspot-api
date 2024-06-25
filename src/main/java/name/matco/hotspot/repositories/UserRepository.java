@@ -15,11 +15,11 @@ public interface UserRepository {
 
 	Optional<User> getByHandle(String handle);
 
-	boolean save(User user);
+	void save(User user);
 
-	boolean delete(User user);
+	void delete(User user);
 
-	boolean update(User user);
+	void update(User user);
 
 	default String generateHandle(final User user) {
 		//generate base handle

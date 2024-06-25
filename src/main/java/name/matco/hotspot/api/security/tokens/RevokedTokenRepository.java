@@ -6,5 +6,5 @@ public interface RevokedTokenRepository {
 
 	Optional<RevokedToken> getByToken(String token);
 
-	boolean save(RevokedToken revokedToken);
+	void save(RevokedToken revokedToken);
 }
