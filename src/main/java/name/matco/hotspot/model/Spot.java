@@ -1,7 +1,6 @@
 package name.matco.hotspot.model;
 
 import java.util.Objects;
-import java.util.Set;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -32,8 +31,6 @@ public class Spot implements Displayable {
 	private double longitude;
 
 	private String description;
-
-	private Set<String> labels;
 
 	public final int getPk() {
 		return pk;
@@ -91,14 +88,6 @@ public class Spot implements Displayable {
 
 	public final void setDescription(final String description) {
 		this.description = description;
-	}
-
-	public final Set<String> getLabels() {
-		return labels;
-	}
-
-	public final void setLabels(final Set<String> labels) {
-		this.labels = labels;
 	}
 
 	@Override

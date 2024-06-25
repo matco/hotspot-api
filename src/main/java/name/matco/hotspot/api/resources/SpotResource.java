@@ -77,7 +77,6 @@ public class SpotResource {
 			spot.setDescription(spotDto.getDescription());
 			spot.setLatitude(spotDto.getLatitude());
 			spot.setLongitude(spotDto.getLongitude());
-			spot.setLabels(spotDto.getLabels());
 			spotRepository.update(spot);
 			return Response.noContent().build();
 		}
