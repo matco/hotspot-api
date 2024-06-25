@@ -34,3 +34,14 @@ jobs:
         with:
           name: reports
           path: target/surefire-reports
+
+      # generate and transform coverage report
+      - name: Generate coverage report
+        shell: bash
+        run: mvn jacoco:report
+      - name: Transform coverage report to PDF
+        uses: LukaszLapaj/html-to-pdf-action@master
+        with:
+          htmlFile: target/site/jacoco/index.html
+          outputFile: coverage-report.pdf
+          pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
