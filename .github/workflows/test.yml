@@ -29,11 +29,6 @@ jobs:
         run: mvn -B checkstyle:check
       - name: Create application package
         run: mvn -B package
-      - name: Store test reports
-        uses: actions/upload-artifact@v4
-        with:
-          name: reports
-          path: target/surefire-reports
 
       # generate and transform coverage report
       - name: Generate coverage report
@@ -45,3 +40,11 @@ jobs:
           htmlFile: target/site/jacoco/index.html
           outputFile: coverage-report.pdf
           pdfOptions: '{"format": "A4", "margin": {"top": "10mm", "left": "10mm", "right": "10mm", "bottom": "10mm"}}'
+
+      - name: Store test reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: reports
+          path: |
+            target/surefire-reports
+            coverage-report.pdf
