@@ -11,7 +11,7 @@ on:
 
 jobs:
   package:
-    name: Test and publish package
+    name: Test package
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the project
