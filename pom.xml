@@ -185,6 +185,15 @@
 			</plugin>
 
 			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-checkstyle-plugin</artifactId>
+				<version>3.3.1</version>
+				<configuration>
+					<configLocation>checkstyle.xml</configLocation>
+				</configuration>
+			</plugin>
+
+			<plugin>
 				<groupId>org.eclipse.jetty.ee10</groupId>
 				<artifactId>jetty-ee10-maven-plugin</artifactId>
 				<version>${jetty-version}</version>

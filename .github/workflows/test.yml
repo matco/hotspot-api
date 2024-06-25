@@ -24,6 +24,9 @@ jobs:
           cache: 'maven'
       - name: Download application dependencies
         run: mvn -B dependency:go-offline --batch-mode
+      - name: Check style of codebase
+        shell: bash
+        run: mvn -B checkstyle:check
       - name: Create application package
         run: mvn -B package
       - name: Store test reports
