@@ -13,7 +13,7 @@ public class RevokedTokenRepositoryMock implements RevokedTokenRepository {
 
 	@Override
 	public Optional<RevokedToken> getByToken(final String token) {
-		return revokedTokens.stream().filter(t -> t.getToken().equals(token)).findAny();
+		return revokedTokens.stream().filter(t -> t.token().equals(token)).findAny();
 	}
 
 	@Override
