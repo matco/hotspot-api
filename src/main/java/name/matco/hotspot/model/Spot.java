@@ -104,9 +104,6 @@ public class Spot implements Displayable {
 			return false;
 		}
 		final Spot other = (Spot) obj;
-		if(!Objects.equals(uuid, other.uuid)) {
-			return false;
-		}
-		return true;
+		return Objects.equals(uuid, other.uuid);
 	}
 }

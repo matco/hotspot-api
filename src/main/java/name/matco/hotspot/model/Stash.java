@@ -93,10 +93,7 @@ public class Stash implements Displayable {
 			return false;
 		}
 		final Stash other = (Stash) obj;
-		if(!Objects.equals(uuid, other.uuid)) {
-			return false;
-		}
-		return true;
+		return Objects.equals(uuid, other.uuid);
 	}
 
 }
