@@ -1,7 +1,6 @@
 package name.matco.hotspot.model;
 
 import java.util.Objects;
-import java.util.Set;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -26,8 +25,6 @@ public class Stash implements Displayable {
 	private String name;
 
 	private String description;
-
-	private Set<Spot> spots;
 
 	public final int getPk() {
 		return pk;
@@ -69,14 +66,6 @@ public class Stash implements Displayable {
 
 	public final void setDescription(final String description) {
 		this.description = description;
-	}
-
-	public final Set<Spot> getSpots() {
-		return spots;
-	}
-
-	public final void setSpots(final Set<Spot> spots) {
-		this.spots = spots;
 	}
 
 	@Override
