@@ -42,16 +42,12 @@ public class AuthenticatedTest extends APITest {
 	}
 
 	public void create_user() {
-		final var newUser = new UserDto();
-		newUser.setName(USER_NAME);
-		newUser.setEmail(USER_EMAIL);
-		newUser.setPassword(USER_PASSWORD);
+		final var newUser = new UserDto(USER_EMAIL, USER_PASSWORD, USER_NAME);
 		user = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(UserDto.class);
-		user.setHandle(newUser.getHandle());
 	}
 
 	public void delete_user() {
-		target(String.format("users/%", user.getHandle())).request().delete();
+		target(String.format("users/%", user.handle())).request().delete();
 	}
 
 	public void get_token(final String email, final String password) {

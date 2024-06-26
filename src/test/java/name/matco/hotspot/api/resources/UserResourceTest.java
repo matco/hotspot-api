@@ -30,16 +30,12 @@ public class UserResourceTest extends APITest {
 		final String email = String.format("%s@matco.name", name.replace(" ", "."));
 		final String password = "password";
 
-		final UserDto newUser = new UserDto();
-		newUser.setName(name);
-		newUser.setEmail(email);
-		newUser.setPassword(password);
-
+		final UserDto newUser = new UserDto(email, password, name);
 		final UserDto responseUser = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(UserDto.class);
-		assertEquals(name, responseUser.getName());
-		assertEquals(email, responseUser.getEmail());
+		assertEquals(name, responseUser.name());
+		assertEquals(email, responseUser.email());
 		final var handle = name.replace(" ", "_").toLowerCase();
-		assertEquals(handle, responseUser.getHandle());
+		assertEquals(handle, responseUser.handle());
 
 		final Credentials credentials = new Credentials();
 		credentials.email = email;

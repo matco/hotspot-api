@@ -8,62 +8,20 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import name.matco.hotspot.model.User;
 
 @JsonInclude(value = Include.NON_NULL)
-public class UserDto {
+public record UserDto(
+	@NotNull String handle,
+	@NotNull String email,
+	@NotNull String password, //password field is used only during user registration
+	@NotNull String name
+) {
 
-	@NotNull
-	private String handle;
-
-	@NotNull
-	private String email;
-
-	@NotNull
-	private String password; //password field will be used during user registration
-
-	@NotNull
-	private String name;
-
-	public UserDto() {
-		//required by serializer
-		//when coming from an HTTP client
+	public UserDto(final String email, final String password, final String name) {
+		this(null, email, password, name);
 	}
 
 	public UserDto(final User user) {
-		handle = user.getHandle();
-		email = user.getEmail();
 		//do not expose password
-		name = user.getName();
-	}
-
-	public String getHandle() {
-		return handle;
-	}
-
-	public void setHandle(final String handle) {
-		this.handle = handle;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(final String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(final String password) {
-		this.password = password;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+		this(user.getHandle(), user.getEmail(), null, user.getName());
 	}
 
 }
