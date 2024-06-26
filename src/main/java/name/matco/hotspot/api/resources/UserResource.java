@@ -55,12 +55,11 @@ public class UserResource {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@PermitAll
 	public UserDto createUser(final UserDto userDto) throws Exception {
-		if(StringUtils.isAnyBlank(userDto.getFirstname(), userDto.getLastname(), userDto.getEmail(), userDto.getPassword())) {
-			throw new BadRequestException("First name, last name, email and password are required");
+		if(StringUtils.isAnyBlank(userDto.getName(), userDto.getEmail(), userDto.getPassword())) {
+			throw new BadRequestException("Name, email and password are required");
 		}
 		final var user = new User();
-		user.setFirstname(userDto.getFirstname());
-		user.setLastname(userDto.getLastname());
+		user.setName(userDto.getName());
 		user.setEmail(userDto.getEmail());
 		user.setPlainTextPassword(userDto.getPassword());
 		user.setHandle(userRepository.generateHandle(user));
@@ -74,8 +73,7 @@ public class UserResource {
 	public UserDto updateUser(@PathParam("handle") final String handle, final UserDto userDto) throws Exception {
 		final User user = (User) sc.getUserPrincipal();
 		if(user.getHandle().equals(handle)) {
-			user.setFirstname(userDto.getFirstname());
-			user.setLastname(userDto.getLastname());
+			user.setName(userDto.getName());
 			user.setEmail(userDto.getEmail());
 			userRepository.update(user);
 			return new UserDto(user);

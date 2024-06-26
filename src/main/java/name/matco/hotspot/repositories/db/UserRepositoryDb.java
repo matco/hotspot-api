@@ -45,8 +45,7 @@ public class UserRepositoryDb implements UserRepository {
 	@Override
 	public void update(final User user) {
 		dsl.update(USERS)
-				.set(USERS.FIRSTNAME, user.getFirstname())
-				.set(USERS.LASTNAME, user.getLastname())
+				.set(USERS.NAME, user.getName())
 				.set(USERS.EMAIL, user.getEmail())
 				.set(USERS.PASSWORD, user.getPassword())
 				.where(USERS.PK.eq(user.getPk()))

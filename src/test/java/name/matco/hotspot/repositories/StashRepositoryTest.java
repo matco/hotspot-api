@@ -14,9 +14,8 @@ public class StashRepositoryTest extends RepositoryTest {
 	@Test
 	public void test() {
 		final User user = new User();
-		user.setFirstname("John");
-		user.setLastname("Doe");
-		user.setEmail("john@doe.com");
+		user.setName("John Doe");
+		user.setEmail("john.doe@matco.name");
 		final UserRepository userRepository = LOCATOR.getService(UserRepository.class);
 		userRepository.save(user);
 

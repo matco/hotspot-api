@@ -77,59 +77,45 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> {
 	}
 
 	/**
-	 * Setter for <code>users.firstname</code>.
+	 * Setter for <code>users.name</code>.
 	 */
-	public void setFirstname(String value) {
+	public void setName(String value) {
 		set(4, value);
 	}
 
 	/**
-	 * Getter for <code>users.firstname</code>.
+	 * Getter for <code>users.name</code>.
 	 */
-	public String getFirstname() {
+	public String getName() {
 		return (String) get(4);
-	}
-
-	/**
-	 * Setter for <code>users.lastname</code>.
-	 */
-	public void setLastname(String value) {
-		set(5, value);
-	}
-
-	/**
-	 * Getter for <code>users.lastname</code>.
-	 */
-	public String getLastname() {
-		return (String) get(5);
 	}
 
 	/**
 	 * Setter for <code>users.email</code>.
 	 */
 	public void setEmail(String value) {
-		set(6, value);
+		set(5, value);
 	}
 
 	/**
 	 * Getter for <code>users.email</code>.
 	 */
 	public String getEmail() {
-		return (String) get(6);
+		return (String) get(5);
 	}
 
 	/**
 	 * Setter for <code>users.password</code>.
 	 */
 	public void setPassword(String value) {
-		set(7, value);
+		set(6, value);
 	}
 
 	/**
 	 * Getter for <code>users.password</code>.
 	 */
 	public String getPassword() {
-		return (String) get(7);
+		return (String) get(6);
 	}
 
 	// -------------------------------------------------------------------------
@@ -155,15 +141,14 @@ public class UsersRecord extends UpdatableRecordImpl<UsersRecord> {
 	/**
 	 * Create a detached, initialised UsersRecord
 	 */
-	public UsersRecord(Integer pk, ZonedDateTime creationDate, ZonedDateTime modificationDate, String handle, String firstname, String lastname, String email, String password) {
+	public UsersRecord(Integer pk, ZonedDateTime creationDate, ZonedDateTime modificationDate, String handle, String name_, String email, String password) {
 		super(Users.USERS);
 
 		setPk(pk);
 		setCreationDate(creationDate);
 		setModificationDate(modificationDate);
 		setHandle(handle);
-		setFirstname(firstname);
-		setLastname(lastname);
+		setName(name_);
 		setEmail(email);
 		setPassword(password);
 		resetChangedOnNotNull();

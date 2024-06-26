@@ -38,8 +38,7 @@ public class UserRepositoryMock implements UserRepository {
 	@Override
 	public void update(final User user) {
 		final User oldUser = getByHandle(user.getHandle()).get();
-		oldUser.setFirstname(user.getFirstname());
-		oldUser.setLastname(user.getLastname());
+		oldUser.setName(user.getName());
 	}
 
 	@Override

@@ -81,14 +81,9 @@ public class Users extends TableImpl<UsersRecord> {
 	public final TableField<UsersRecord, String> HANDLE = createField(DSL.name("handle"), SQLDataType.VARCHAR(200).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
 
 	/**
-	 * The column <code>users.firstname</code>.
+	 * The column <code>users.name</code>.
 	 */
-	public final TableField<UsersRecord, String> FIRSTNAME = createField(DSL.name("firstname"), SQLDataType.VARCHAR(200).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
-
-	/**
-	 * The column <code>users.lastname</code>.
-	 */
-	public final TableField<UsersRecord, String> LASTNAME = createField(DSL.name("lastname"), SQLDataType.VARCHAR(200).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
+	public final TableField<UsersRecord, String> NAME = createField(DSL.name("name"), SQLDataType.VARCHAR(200).defaultValue(DSL.field(DSL.raw("NULL"), SQLDataType.VARCHAR)), this, "");
 
 	/**
 	 * The column <code>users.email</code>.

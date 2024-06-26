@@ -18,9 +18,8 @@ import name.matco.hotspot.api.security.tokens.Credentials;
 
 public class AuthenticatedTest extends APITest {
 
-	public static final String USER_FIRSTNAME = "John";
-	public static final String USER_LASTNAME = "Doe";
-	public static final String USER_EMAIL = "john@doe.name";
+	public static final String USER_NAME = "John Doe";
+	public static final String USER_EMAIL = "john.doe@matco.name";
 	public static final String USER_PASSWORD = "password";
 
 	public static final GenericType<Map<String, String>> TOKEN_TYPE = new GenericType<>() {
@@ -44,8 +43,7 @@ public class AuthenticatedTest extends APITest {
 
 	public void create_user() {
 		final var newUser = new UserDto();
-		newUser.setFirstname(USER_FIRSTNAME);
-		newUser.setLastname(USER_LASTNAME);
+		newUser.setName(USER_NAME);
 		newUser.setEmail(USER_EMAIL);
 		newUser.setPassword(USER_PASSWORD);
 		user = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(UserDto.class);

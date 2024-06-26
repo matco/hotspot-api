@@ -10,6 +10,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response.Status;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 
 import name.matco.hotspot.api.APITest;
@@ -19,23 +20,25 @@ import name.matco.hotspot.api.security.tokens.Credentials;
 
 public class UserResourceTest extends APITest {
 
+	private static String generateNamePart() {
+		return StringUtils.capitalize(RandomStringUtils.randomAlphabetic(5).toLowerCase());
+	}
+
 	@Test
 	public void test_user_crud() {
-		final String lastname = RandomStringUtils.randomAlphabetic(5);
-		final String email = String.format("john@%s.com", lastname);
+		final String name = String.format("%s %s", generateNamePart(), generateNamePart());
+		final String email = String.format("%s@matco.name", name.replace(" ", "."));
 		final String password = "password";
 
 		final UserDto newUser = new UserDto();
-		newUser.setFirstname("John");
-		newUser.setLastname(lastname);
+		newUser.setName(name);
 		newUser.setEmail(email);
 		newUser.setPassword(password);
 
 		final UserDto responseUser = target("users").request().post(Entity.entity(newUser, MediaType.APPLICATION_JSON)).readEntity(UserDto.class);
-		assertEquals("John", responseUser.getFirstname());
-		assertEquals(lastname, responseUser.getLastname());
+		assertEquals(name, responseUser.getName());
 		assertEquals(email, responseUser.getEmail());
-		final var handle = String.format("john.%s", lastname.toLowerCase());
+		final var handle = name.replace(" ", "_").toLowerCase();
 		assertEquals(handle, responseUser.getHandle());
 
 		final Credentials credentials = new Credentials();

@@ -20,10 +20,7 @@ public class UserDto {
 	private String password; //password field will be used during user registration
 
 	@NotNull
-	private String firstname;
-
-	@NotNull
-	private String lastname;
+	private String name;
 
 	public UserDto() {
 		//required by serializer
@@ -34,8 +31,7 @@ public class UserDto {
 		handle = user.getHandle();
 		email = user.getEmail();
 		//do not expose password
-		firstname = user.getFirstname();
-		lastname = user.getLastname();
+		name = user.getName();
 	}
 
 	public String getHandle() {
@@ -62,20 +58,12 @@ public class UserDto {
 		this.password = password;
 	}
 
-	public String getFirstname() {
-		return firstname;
+	public String getName() {
+		return name;
 	}
 
-	public void setFirstname(final String firstname) {
-		this.firstname = firstname;
-	}
-
-	public String getLastname() {
-		return lastname;
-	}
-
-	public void setLastname(final String lastname) {
-		this.lastname = lastname;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 }

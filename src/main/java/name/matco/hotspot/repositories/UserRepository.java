@@ -23,7 +23,7 @@ public interface UserRepository {
 
 	default String generateHandle(final User user) {
 		//generate base handle
-		String baseHandle = String.format("%s.%s", user.getFirstname(), user.getLastname());
+		String baseHandle = user.getName();
 		baseHandle = StringUtils.replace(baseHandle, " ", "_");
 		baseHandle = StringUtils.lowerCase(baseHandle);
 		//look in database if handle does not already exist

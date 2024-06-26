@@ -26,10 +26,7 @@ public class User implements Principal {
 	private String password;
 
 	@NotNull
-	private String firstname;
-
-	@NotNull
-	private String lastname;
+	private String name;
 
 	public final int getPk() {
 		return pk;
@@ -63,20 +60,13 @@ public class User implements Principal {
 		this.password = password;
 	}
 
-	public final String getFirstname() {
-		return firstname;
+	@Override
+	public String getName() {
+		return name;
 	}
 
-	public final void setFirstname(final String firstname) {
-		this.firstname = firstname;
-	}
-
-	public final String getLastname() {
-		return lastname;
-	}
-
-	public final void setLastname(final String lastname) {
-		this.lastname = lastname;
+	public void setName(final String name) {
+		this.name = name;
 	}
 
 	@JsonIgnore
@@ -88,9 +78,4 @@ public class User implements Principal {
 		return BCrypt.verifyer().verify(challengePassword.toCharArray(), password).verified;
 	}
 
-	@Override
-	@JsonIgnore
-	public String getName() {
-		return String.format("%s %s", firstname, lastname);
-	}
 }
