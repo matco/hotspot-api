@@ -12,7 +12,7 @@ import name.matco.hotspot.repositories.db.StashRepositoryDb;
 public class StashRepositoryTest extends RepositoryTest {
 
 	@Test
-	public void test() {
+	public void test() throws EmailAlreadyExistsException {
 		final User user = new User();
 		user.setName("John Doe");
 		user.setEmail("john.doe@matco.name");

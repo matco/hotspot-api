@@ -9,6 +9,7 @@ import org.jooq.DSLContext;
 
 import name.matco.hotspot.model.User;
 import name.matco.hotspot.model.jooq.tables.records.UsersRecord;
+import name.matco.hotspot.repositories.EmailAlreadyExistsException;
 import name.matco.hotspot.repositories.UserRepository;
 
 import static name.matco.hotspot.model.jooq.Tables.USERS;
@@ -34,7 +35,11 @@ public class UserRepositoryDb implements UserRepository {
 	}
 
 	@Override
-	public void save(final User user) {
+	public void save(final User user) throws EmailAlreadyExistsException {
+		//check that no user with the same e-mail already exists
+		if(getByEmail(user.getEmail()).isPresent()) {
+			throw new EmailAlreadyExistsException(user.getEmail());
+		}
 		user.setHandle(generateHandle(user));
 		final var userRecord = new UsersRecord();
 		userRecord.from(user);

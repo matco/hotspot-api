@@ -15,7 +15,7 @@ public interface UserRepository {
 
 	Optional<User> getByHandle(String handle);
 
-	void save(User user);
+	void save(User user) throws EmailAlreadyExistsException;
 
 	void delete(User user);
 
