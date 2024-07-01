@@ -22,9 +22,10 @@ public class InitDatabase {
 
 	private static void importFile(final Connection connection, final InputStream stream) {
 		try(
-				Statement statement = connection.createStatement();
-				//specify charset manually because this test may be launched from Maven and OS may not have utf-8 set as the default charset
-				BufferedReader input = new BufferedReader(new InputStreamReader(stream, Charset.forName("utf-8")))) {
+			Statement statement = connection.createStatement();
+			//specify charset manually because this test may be launched from Maven and OS may not have utf-8 set as the default charset
+			BufferedReader input = new BufferedReader(new InputStreamReader(stream, Charset.forName("utf-8")))
+		) {
 			final StringBuilder sql = new StringBuilder();
 			String line = null;
 			boolean comment = false;

@@ -13,8 +13,8 @@ public class NoSuchElementExceptionMapper implements ExceptionMapper<NoSuchEleme
 	@Override
 	public Response toResponse(final NoSuchElementException exception) {
 		return Response
-				.status(Status.NOT_FOUND)
-				.build();
+			.status(Status.NOT_FOUND)
+			.build();
 	}
 
 }

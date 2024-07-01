@@ -58,12 +58,12 @@ public class SpotRepositoryDb implements SpotRepository {
 	@Override
 	public void update(final Spot spot) {
 		dsl.update(SPOT)
-				.set(SPOT.NAME, spot.getName())
-				.set(SPOT.LATITUDE, spot.getLatitude())
-				.set(SPOT.LONGITUDE, spot.getLongitude())
-				.set(SPOT.DESCRIPTION, spot.getDescription())
-				.where(SPOT.PK.eq(spot.getPk()))
-				.execute();
+			.set(SPOT.NAME, spot.getName())
+			.set(SPOT.LATITUDE, spot.getLatitude())
+			.set(SPOT.LONGITUDE, spot.getLongitude())
+			.set(SPOT.DESCRIPTION, spot.getDescription())
+			.where(SPOT.PK.eq(spot.getPk()))
+			.execute();
 	}
 
 	@Override

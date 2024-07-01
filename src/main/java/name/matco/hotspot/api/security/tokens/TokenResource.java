@@ -48,7 +48,8 @@ public class TokenResource {
 
 	@DELETE
 	public Response revokeToken(
-			@HeaderParam(HttpHeaders.AUTHORIZATION) final String authorization) throws Exception {
+		@HeaderParam(HttpHeaders.AUTHORIZATION) final String authorization
+	) throws Exception {
 		final User user = (User) sc.getUserPrincipal();
 		jwtService.revoke(user, authorization);
 		return Response.noContent().build();

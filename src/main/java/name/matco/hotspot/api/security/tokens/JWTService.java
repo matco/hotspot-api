@@ -35,10 +35,10 @@ public class JWTService {
 	public String create(final User user) {
 		final var expirationDate = ZonedDateTime.now().plusDays(JWT_EXPIRATION_VALIDITY_DAYS);
 		return JWT.create()
-				.withIssuer(JWT_ISSUER)
-				.withClaim("user", user.getEmail())
-				.withExpiresAt(Date.from(expirationDate.toInstant()))
-				.sign(algorithm);
+			.withIssuer(JWT_ISSUER)
+			.withClaim("user", user.getEmail())
+			.withExpiresAt(Date.from(expirationDate.toInstant()))
+			.sign(algorithm);
 	}
 
 	public DecodedJWT verify(final String token) throws JWTVerificationException, InvalidToken {

@@ -84,8 +84,9 @@ public class UserResource {
 	@DELETE
 	@Path("{handle}")
 	public Response deleteUser(
-			@PathParam("handle") final String handle,
-			@HeaderParam(HttpHeaders.AUTHORIZATION) final String authorization) throws Exception {
+		@PathParam("handle") final String handle,
+		@HeaderParam(HttpHeaders.AUTHORIZATION) final String authorization
+	) throws Exception {
 		final User user = (User) sc.getUserPrincipal();
 		if(user.getHandle().equals(handle)) {
 			//delete

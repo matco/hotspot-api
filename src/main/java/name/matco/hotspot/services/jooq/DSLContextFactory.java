@@ -15,7 +15,7 @@ public class DSLContextFactory implements Factory<DSLContext> {
 
 	static Settings getSettings() {
 		return new Settings()
-				.withRenderImplicitJoinToManyType(RenderImplicitJoinType.INNER_JOIN);
+			.withRenderImplicitJoinToManyType(RenderImplicitJoinType.INNER_JOIN);
 	}
 
 	@Inject

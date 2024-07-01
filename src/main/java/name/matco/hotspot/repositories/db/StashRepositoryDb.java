@@ -50,10 +50,10 @@ public class StashRepositoryDb implements StashRepository {
 	@Override
 	public void update(final Stash stash) {
 		dsl.update(STASH)
-				.set(STASH.NAME, stash.getName())
-				.set(STASH.DESCRIPTION, stash.getDescription())
-				.where(STASH.PK.eq(stash.getPk()))
-				.execute();
+			.set(STASH.NAME, stash.getName())
+			.set(STASH.DESCRIPTION, stash.getDescription())
+			.where(STASH.PK.eq(stash.getPk()))
+			.execute();
 	}
 
 	@Override
