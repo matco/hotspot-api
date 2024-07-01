@@ -1,12 +1,12 @@
 package name.matco.hotspot.repositories;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import org.junit.jupiter.api.Test;
 
 import name.matco.hotspot.model.Spot;
 import name.matco.hotspot.model.User;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SpotRepositoryTest extends RepositoryTest {
 

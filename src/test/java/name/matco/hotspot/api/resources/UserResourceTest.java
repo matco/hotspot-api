@@ -1,7 +1,5 @@
 package name.matco.hotspot.api.resources;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import java.util.Map;
 
 import jakarta.ws.rs.client.Entity;
@@ -17,6 +15,8 @@ import name.matco.hotspot.api.APITest;
 import name.matco.hotspot.api.AuthenticatedTest;
 import name.matco.hotspot.api.dto.UserDto;
 import name.matco.hotspot.api.security.tokens.Credentials;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class UserResourceTest extends APITest {
 

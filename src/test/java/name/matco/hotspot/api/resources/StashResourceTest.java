@@ -1,9 +1,5 @@
 package name.matco.hotspot.api.resources;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -17,6 +13,10 @@ import org.junit.jupiter.api.Test;
 
 import name.matco.hotspot.api.AuthenticatedTest;
 import name.matco.hotspot.model.Stash;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class StashResourceTest extends AuthenticatedTest {
 

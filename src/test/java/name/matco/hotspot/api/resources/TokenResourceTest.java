@@ -1,8 +1,5 @@
 package name.matco.hotspot.api.resources;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
 import jakarta.ws.rs.client.Entity;
 import jakarta.ws.rs.core.HttpHeaders;
 import jakarta.ws.rs.core.MediaType;
@@ -12,6 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import name.matco.hotspot.api.AuthenticatedTest;
 import name.matco.hotspot.api.security.tokens.Credentials;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class TokenResourceTest extends AuthenticatedTest {
 
