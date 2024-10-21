@@ -1,6 +1,6 @@
 package name.matco.hotspot.repositories;
 
-import java.sql.SQLException;
+import java.io.IOException;
 import java.util.UUID;
 
 import jakarta.inject.Singleton;
@@ -26,7 +26,7 @@ public class RepositoryTest {
 	protected static ServiceLocator LOCATOR;
 
 	@BeforeAll
-	public static void init() throws SQLException {
+	public static void init() throws IOException {
 		//initialize dependency injection
 		final ServiceLocatorFactory factory = ServiceLocatorFactory.getInstance();
 		LOCATOR = factory.create(UUID.randomUUID().toString());
@@ -39,6 +39,6 @@ public class RepositoryTest {
 		config.bind(BuilderHelper.link(SpotRepositoryDb.class).to(SpotRepository.class).in(Singleton.class).build());
 		config.commit();
 		//initialize database
-		InitDatabase.createDatabase(LOCATOR.getService(ConnectionProvider.class));
+		InitDatabase.createDatabase(LOCATOR.getService(DSLContext.class));
 	}
 }
